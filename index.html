@@ -4,596 +4,383 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Golden Hope | K-POP Store</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <title>Kookie Pop | K-Pop Store</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =========================
-     FONDO DECORATIVO
-========================= -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-<div class="background-glow glow-one"></div>
-<div class="background-glow glow-two"></div>
+    <header>
 
-<!-- =========================
-     BARRA SUPERIOR
-========================= -->
+        <a href="#inicio" class="logo">
+            <span>🐰</span>
 
-<div class="top-bar">
-    ✦ GOLDEN HOPE ✦ K-POP · PHOTOCARDS · MANILLAS · PAPELERÍA ✦
-</div>
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-        <a href="#inicio" class="brand">
-            <img src="logo-golden-hope.png"
-                 alt="Golden Hope"
-                 class="logo">
+            <div>
+                <b>KOOKIE</b>
+                <strong>POP</strong>
+            </div>
         </a>
 
-        <nav class="nav" id="nav">
-
+        <nav>
             <a href="#inicio">Inicio</a>
             <a href="#productos">Productos</a>
             <a href="#combos">Combos</a>
+            <a href="#flores">Flores</a>
             <a href="#personaliza">Personaliza</a>
             <a href="#galeria">Galería</a>
-            <a href="#resenas">Reseñas</a>
-
         </nav>
 
-        <button class="cart-button" id="openCart">
-            🛒
-            <span>Carrito</span>
-            <b id="cartCount">0</b>
+        <button id="openCart">
+            🛒 Carrito
+            <span id="cartCount">0</span>
         </button>
 
-        <button class="menu-button" id="menuButton">
-            ☰
-        </button>
+    </header>
 
-    </div>
 
-</header>
+    <!-- =========================
+         INICIO
+    ========================== -->
 
+    <section id="inicio" class="hero">
 
-<!-- =========================
-     HERO
-========================= -->
+        <div class="hero-text">
 
-<main>
+            <p class="mini-title">
+                ✦ K-POP STORE ✦
+            </p>
 
-<section class="hero" id="inicio">
+            <h1>
+                Bienvenido a
+                <span>KOOKIE POP</span>
+            </h1>
 
-    <div class="hero-decoration star-one">✦</div>
-    <div class="hero-decoration star-two">✦</div>
-    <div class="hero-decoration star-three">✦</div>
+            <p>
+                Photocards, manillas, collares, flores eternas
+                y mucho más para llevar tu fandom a otro nivel.
+            </p>
 
-    <div class="hero-content">
+            <div class="hero-buttons">
 
-        <div class="hero-logo-box">
-            <img src="logo-golden-hope.png"
-                 alt="Golden Hope"
-                 class="hero-logo">
-        </div>
+                <a href="#productos">
+                    Ver productos ✦
+                </a>
 
-        <span class="eyebrow">
-            ✦ TU COLECCIÓN · TU ESTILO ✦
-        </span>
+                <a href="#combos">
+                    Ver combos
+                </a>
 
-        <h1>
-            Tu mundo K-POP,
-            <span>en versión Golden.</span>
-        </h1>
-
-        <p>
-            Photocards, manillas, papelería y detalles hechos
-            para llevar tu fandom contigo. 💜
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="#productos" class="main-button">
-                Ver productos ✦
-            </a>
-
-            <a href="#combos" class="secondary-button">
-                Ver combos
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="hero-card">
-
-        <div class="floating-card card-back">
-            ✦
-        </div>
-
-        <div class="floating-card card-middle">
-            ♡
-        </div>
-
-        <div class="floating-card card-front">
-
-            <div class="mini-crown">♛</div>
-
-            <strong>GOLDEN</strong>
-            <span>HOPE</span>
-
-            <small>K-POP STORE</small>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     SEPARADOR
-========================= -->
-
-<div class="section-divider">
-    <span></span>
-    ✦
-    <span></span>
-</div>
-
-
-<!-- =========================
-     PRODUCTOS
-========================= -->
-
-<section class="section products-section" id="productos">
-
-    <div class="section-heading">
-
-        <span class="eyebrow">
-            GOLDEN HOPE SHOP
-        </span>
-
-        <h2>
-            Productos
-        </h2>
-
-        <p>
-            Cositas individuales para armar tu colección a tu manera.
-        </p>
-
-    </div>
-
-    <div class="products-grid" id="productsGrid">
-        <!-- JS -->
-    </div>
-
-</section>
-
-
-<!-- =========================
-     SEPARADOR
-========================= -->
-
-<div class="section-divider">
-    <span></span>
-    ♡
-    <span></span>
-</div>
-
-
-<!-- =========================
-     COMBOS
-========================= -->
-
-<section class="section combos-section" id="combos">
-
-    <div class="section-heading">
-
-        <span class="eyebrow">
-            PACKS GOLDEN HOPE
-        </span>
-
-        <h2>
-            Combos
-        </h2>
-
-        <p>
-            Más cositas juntas, más fandom, más Golden Hope.
-        </p>
-
-    </div>
-
-    <div class="combos-grid" id="combosGrid">
-        <!-- JS -->
-    </div>
-
-</section>
-
-
-<!-- =========================
-     SUPER FAN
-========================= -->
-
-<section class="superfan">
-
-    <div class="superfan-decoration">✦</div>
-
-    <div class="superfan-content">
-
-        <span class="eyebrow">
-            EL FAVORITO DE GOLDEN HOPE
-        </span>
-
-        <h2>
-            Caja <span>SUPER FAN</span>
-        </h2>
-
-        <p>
-            Todo lo que una K-POP fan necesita en una sola caja.
-            💜✨📸
-        </p>
-
-        <div class="superfan-list">
-
-            <span>♡ 1 hoja de stickers</span>
-            <span>♡ 1 postcard</span>
-            <span>♡ 5 photocards</span>
-            <span>♡ 2 bracelets</span>
-            <span>♡ Decoración K-POP</span>
-
-        </div>
-
-        <div class="superfan-price">
-            $30.000
-        </div>
-
-        <button
-            class="main-button add-product"
-            data-add="4">
-            🛒 Agregar al carrito
-        </button>
-
-    </div>
-
-    <div class="superfan-box">
-
-        <div class="box-glow"></div>
-
-        <div class="fake-box">
-
-            <div class="box-logo">
-                <img src="logo-golden-hope.png"
-                     alt="Golden Hope">
             </div>
 
-            <div class="box-stars">
-                ✦　✧　✦
+        </div>
+
+
+        <div class="hero-logo">
+
+            <div class="logo-circle">
+
+                <span class="bunny">
+                    🐰
+                </span>
+
+                <h2>
+                    <b>KOOKIE</b>
+                    <strong>POP</strong>
+                </h2>
+
+                <small>
+                    K-POP STORE
+                </small>
+
             </div>
-
-            <strong>SUPER FAN</strong>
-
-            <small>
-                GOLDEN HOPE
-            </small>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================
-     PERSONALIZA
-========================= -->
+    <!-- =========================
+         PRODUCTOS
+    ========================== -->
 
-<section class="section personalize-section" id="personaliza">
+    <section id="productos" class="section">
 
-    <div class="personalize-card">
+        <div class="section-title">
 
-        <div class="personalize-text">
-
-            <span class="eyebrow">
-                HAZLO TUYO
-            </span>
+            <p>KOOKIE POP SHOP</p>
 
             <h2>
-                Personaliza tu pedido
+                Nuestros productos
+            </h2>
+
+            <span>
+                Todo puede ser personalizado.
+            </span>
+
+        </div>
+
+
+        <div
+            id="productsGrid"
+            class="products-grid">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         COMBOS
+    ========================== -->
+
+    <section id="combos" class="section dark">
+
+        <div class="section-title">
+
+            <p>PACKS KOOKIE POP</p>
+
+            <h2>
+                Combos
+            </h2>
+
+            <span>
+                Más productos, más fandom 💜
+            </span>
+
+        </div>
+
+
+        <div
+            id="combosGrid"
+            class="combos-grid">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FLORES
+    ========================== -->
+
+    <section id="flores" class="section">
+
+        <div class="section-title">
+
+            <p>🌸 NUEVO</p>
+
+            <h2>
+                Ramos Kookie Pop
+            </h2>
+
+            <span>
+                Photocards + flores eternas
+            </span>
+
+        </div>
+
+
+        <div class="custom-message">
+
+            <div>
+                🌸
+            </div>
+
+            <p>
+                <b>
+                    ¡Tú eliges el estilo!
+                </b>
+
+                <br>
+
+                Las photocards son totalmente
+                personalizadas al igual que
+                el estilo de las flores.
+            </p>
+
+        </div>
+
+
+        <div
+            id="bouquetsGrid"
+            class="bouquets-grid">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PERSONALIZA
+    ========================== -->
+
+    <section id="personaliza" class="personalize">
+
+        <div>
+
+            <p>
+                HAZLO A TU MANERA
+            </p>
+
+            <h2>
+                Tu idea.
+                <span>
+                    Nuestro diseño.
+                </span>
             </h2>
 
             <p>
-                Cuéntanos qué quieres, qué grupo te gusta y qué
-                colores quieres para tu pedido.
+                Cuéntanos qué grupo te gusta,
+                qué colores quieres y cómo
+                imaginas tu pedido.
             </p>
 
-            <button class="main-button" id="personalizeButton">
-                💜 Personalizar por WhatsApp
+            <button id="personalizeButton">
+                💬 Personalizar por WhatsApp
             </button>
 
         </div>
 
-        <div class="personalize-art">
+        <div class="personalize-logo">
+            🐰
+            <b>KOOKIE</b>
+            <strong>POP</strong>
+        </div>
 
-            <div class="orbit orbit-one"></div>
-            <div class="orbit orbit-two"></div>
+    </section>
 
-            <div class="personalize-logo">
-                <img src="logo-golden-hope.png"
-                     alt="Golden Hope">
-            </div>
+
+    <!-- =========================
+         GALERÍA
+    ========================== -->
+
+    <section id="galeria" class="section">
+
+        <div class="section-title">
+
+            <p>KOOKIE POP VIBES</p>
+
+            <h2>
+                Galería
+            </h2>
 
         </div>
 
-    </div>
 
-</section>
+        <div class="upload">
 
-
-<!-- =========================
-     GALERÍA
-========================= -->
-
-<section class="section gallery-section" id="galeria">
-
-    <div class="section-heading">
-
-        <span class="eyebrow">
-            GOLDEN HOPE VIBES
-        </span>
-
-        <h2>
-            Galería
-        </h2>
-
-        <p>
-            Sube fotos de tus productos y crea tu propia vitrina.
-        </p>
-
-    </div>
-
-    <div class="upload-area">
-
-        <label for="imageUpload" class="upload-button">
-            📸 Subir fotos de productos
-        </label>
-
-        <input
-            type="file"
-            id="imageUpload"
-            accept="image/*"
-            multiple
-            hidden>
-
-        <p>
-            Puedes seleccionar varias imágenes.
-        </p>
-
-    </div>
-
-    <div class="gallery-grid" id="galleryGrid">
-
-        <div class="gallery-empty">
-            <span>✦</span>
-            <p>Aquí aparecerán tus productos</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     RESEÑAS
-========================= -->
-
-<section class="section reviews-section" id="resenas">
-
-    <div class="section-heading">
-
-        <span class="eyebrow">
-            LO QUE DICEN DE NOSOTROS
-        </span>
-
-        <h2>
-            Reseñas
-        </h2>
-
-        <p>
-            Deja tu experiencia y califica tu compra.
-        </p>
-
-    </div>
-
-    <div class="review-layout">
-
-        <div class="review-form">
-
-            <h3>
-                Tu opinión 💜
-            </h3>
+            <label for="imageUpload">
+                📸 Subir fotos
+            </label>
 
             <input
-                type="text"
-                id="reviewName"
-                placeholder="Tu nombre">
+                id="imageUpload"
+                type="file"
+                accept="image/*"
+                multiple
+                hidden>
 
-            <textarea
-                id="reviewText"
-                placeholder="Cuéntanos qué te pareció..."
-                rows="4"></textarea>
+        </div>
 
-            <div class="stars-selector" id="starsSelector">
 
-                <button data-star="1">★</button>
-                <button data-star="2">★</button>
-                <button data-star="3">★</button>
-                <button data-star="4">★</button>
-                <button data-star="5">★</button>
+        <div
+            id="galleryGrid"
+            class="gallery-grid">
+        </div>
 
-            </div>
+    </section>
 
-            <button class="main-button" id="addReview">
-                Publicar reseña
+
+    <!-- =========================
+         CONTACTO
+    ========================== -->
+
+    <section class="contact">
+
+        <h2>
+            ¿Listo para tu pedido? 💜
+        </h2>
+
+        <p>
+            Escríbenos y cuéntanos qué quieres.
+        </p>
+
+        <a
+            id="whatsappLink"
+            target="_blank">
+
+            💬 WhatsApp
+
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         CARRITO
+    ========================== -->
+
+    <div id="cartOverlay"></div>
+
+    <aside id="cartDrawer">
+
+        <div class="cart-header">
+
+            <h2>
+                Mi carrito 🛒
+            </h2>
+
+            <button id="closeCart">
+                ×
             </button>
 
         </div>
 
-        <div class="reviews-list" id="reviewsList">
-            <!-- JS -->
+
+        <div
+            id="cartItems"
+            class="cart-items">
         </div>
 
-    </div>
 
-</section>
+        <div class="cart-footer">
+
+            <div>
+                Total:
+                <strong id="cartTotal">
+                    $0
+                </strong>
+            </div>
+
+            <button id="sendOrder">
+                💬 Pedir por WhatsApp
+            </button>
+
+            <button id="clearCart">
+                Vaciar carrito
+            </button>
+
+        </div>
+
+    </aside>
 
 
-<!-- =========================
-     WHATSAPP
-========================= -->
-
-<section class="whatsapp-section">
-
-    <div>
-
-        <span class="eyebrow">
-            ¿TIENES ALGUNA PREGUNTA?
-        </span>
+    <footer>
 
         <h2>
-            Hablemos por WhatsApp 💬
+            🐰 KOOKIE <span>POP</span>
         </h2>
 
         <p>
-            Escríbenos y pregunta por disponibilidad,
-            personalizaciones o pedidos.
+            Photocards · Manillas · Collares · Flores · K-Pop
         </p>
 
-    </div>
-
-    <a
-        class="whatsapp-button"
-        href="https://wa.me/573205946508"
-        target="_blank">
-
-        💬 WhatsApp
-
-    </a>
-
-</section>
+    </footer>
 
 
-</main>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="footer-logo">
-
-        <img
-            src="logo-golden-hope.png"
-            alt="Golden Hope">
-
-    </div>
-
-    <p>
-        Golden Hope · Photocards · Manillas · Papelería K-POP
-    </p>
-
-    <div class="footer-line"></div>
-
-    <small>
-        © 2026 Golden Hope · Hecho con 💜
-    </small>
-
-</footer>
-
-
-<!-- =========================
-     CARRITO
-========================= -->
-
-<div class="cart-overlay" id="cartOverlay"></div>
-
-<aside class="cart-drawer" id="cartDrawer">
-
-    <div class="cart-header">
-
-        <h2>
-            Tu carrito 🛒
-        </h2>
-
-        <button id="closeCart">
-            ×
-        </button>
-
-    </div>
-
-    <div class="cart-items" id="cartItems"></div>
-
-    <div class="cart-footer">
-
-        <div class="cart-total">
-
-            <span>
-                Total
-            </span>
-
-            <strong id="cartTotal">
-                $0
-            </strong>
-
-        </div>
-
-        <button
-            class="main-button full-button"
-            id="sendOrder">
-
-            💬 Pedir por WhatsApp
-
-        </button>
-
-        <button
-            class="clear-cart"
-            id="clearCart">
-
-            Vaciar carrito
-
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- =========================
-     TOAST
-========================= -->
-
-<div class="toast" id="toast">
-    ✦ Agregado al carrito
-</div>
-
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
