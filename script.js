@@ -1,1373 +1,1050 @@
-/* =====================================================
-   KOOKIE POP
-   JAVASCRIPT COMPLETO
-===================================================== */
-
-
-/* =====================================================
-   CONFIGURACIÓN
-===================================================== */
-
-const WHATSAPP = "573205946508";
+// ==========================================
+// KOOKIE POP - SCRIPT.JS
+// ==========================================
 
 const ADMIN_PASSWORD = "KookiePop2026";
+const WHATSAPP = "573205946508";
 
-
-/* =====================================================
-   PRODUCTOS
-===================================================== */
+// ==========================================
+// PRODUCTOS
+// ==========================================
 
 const products = [
-
     {
         id: 1,
-        name: "Photocard laminada X1",
-        description:
-            "1 photocard totalmente personalizada y laminada.",
+        name: "Photocards laminada X1",
+        description: "1 photocard totalmente personalizada y laminada.",
         price: 1500,
         emoji: "📸"
     },
-
     {
         id: 2,
-        name: "Photocard sin laminar X1",
-        description:
-            "1 photocard totalmente personalizada sin laminar.",
+        name: "Photocards sin laminar X1",
+        description: "1 photocard totalmente personalizada.",
         price: 1000,
         emoji: "🖼️"
     },
-
     {
         id: 3,
-        name: "Paquete de Photocards X5",
-        description:
-            "5 photocards totalmente personalizadas.",
+        name: "Paquete de photocards X5",
+        description: "5 photocards totalmente personalizadas.",
         price: 7000,
         emoji: "📸"
     },
-
     {
         id: 4,
-        name: "Paquete de Photocards X10",
-        description:
-            "10 photocards totalmente personalizadas.",
+        name: "Paquete de photocards X10",
+        description: "10 photocards totalmente personalizadas.",
         price: 13000,
         emoji: "💿"
     },
-
     {
         id: 5,
-        name: "Lámina de Stickers X15",
-        description:
-            "15 stickers totalmente personalizados.",
+        name: "Laminado sticker X15",
+        description: "15 stickers personalizados.",
         price: 10000,
         emoji: "✨"
     },
-
     {
         id: 6,
-        name: "Foto Carnet X6",
-        description:
-            "6 fotos carnet sin laminar, totalmente personalizadas.",
+        name: "Foto carnet sin laminar X6",
+        description: "6 fotos carnet sin laminar.",
         price: 5000,
         emoji: "🪪"
     },
-
     {
         id: 7,
-        name: "Foto Strip X5",
-        description:
-            "5 fotos strip totalmente personalizadas.",
+        name: "Foto strip X5",
+        description: "5 fotos strip personalizadas.",
         price: 7000,
         emoji: "🎞️"
     },
-
     {
         id: 8,
-        name: "Separador de Libros X1",
-        description:
-            "1 separador de libros totalmente personalizado.",
+        name: "Separador de libros X1",
+        description: "1 separador personalizado.",
         price: 1500,
         emoji: "📖"
     },
-
     {
         id: 9,
         name: "Manilla X1",
-        description:
-            "1 manilla totalmente personalizada.",
+        description: "1 manilla personalizada.",
         price: 4000,
         emoji: "📿"
     },
-
     {
         id: 10,
         name: "Manilla Bestie Friend X2",
-        description:
-            "2 manillas para compartir con tu bestie.",
+        description: "2 manillas para compartir.",
         price: 7000,
         emoji: "🎀"
     },
-
     {
         id: 11,
-        name: "Manilla Bestie Three Friends X3",
-        description:
-            "3 manillas para compartir entre tres amigos.",
+        name: "Manilla Bestie Threefriend X3",
+        description: "3 manillas para compartir.",
         price: 10000,
         emoji: "🫶"
     },
-
     {
         id: 12,
-        name: "Collar con Perla X1",
-        description:
-            "1 collar con perla totalmente personalizado.",
+        name: "Collar con perla X1",
+        description: "1 collar personalizado con perla.",
         price: 8000,
         emoji: "🤍"
     },
-
     {
         id: 13,
-        name: "Collar con Perla y Dije X1",
-        description:
-            "1 collar con perla y dije totalmente personalizado.",
+        name: "Collar con perla y dije X1",
+        description: "1 collar personalizado con perla y dije.",
         price: 10000,
         emoji: "💎"
     }
-
 ];
 
-
-/* =====================================================
-   COMBOS
-===================================================== */
+// ==========================================
+// COMBOS
+// ==========================================
 
 const combos = [
-
     {
         id: 101,
         name: "KOOKIE",
         description:
-            "Incluye: 1 manilla + 1 photocard laminada + 1 separador de libro.",
+            "1 manilla\n" +
+            "1 photocard laminada\n" +
+            "1 separador de libro",
         price: 6000,
-        emoji: "💜"
+        emoji: "🐰"
     },
-
     {
         id: 102,
         name: "K-POP",
         description:
-            "Incluye: paquete de 5 photocards + 1 foto strip X5.",
+            "1 paquete de 5 photocards\n" +
+            "1 foto strip X5",
         price: 13000,
-        emoji: "🎀"
+        emoji: "🎧"
     },
-
     {
         id: 103,
         name: "BESTIES",
         description:
-            "Incluye: 1 Manilla Besties Three Friends X3 + paquete de 5 photocards.",
+            "1 Manilla Besties Three Friends X3\n" +
+            "1 paquete de 5 photocards",
         price: 15000,
-        emoji: "🫶"
+        emoji: "🎀"
     },
-
     {
         id: 104,
         name: "HOBI",
         description:
-            "Incluye: 1 collar con perla + 1 manilla + 1 photocard laminada.",
+            "1 collar con perla\n" +
+            "1 manilla\n" +
+            "1 photocard laminada",
         price: 12000,
-        emoji: "💎"
+        emoji: "🌻"
     },
-
     {
         id: 105,
         name: "KOOKIE POP",
         description:
-            "Incluye: 1 collar con perla y dije + 1 Manilla Besties Three Friends X3 + paquete de 5 photocards + 1 separador de libro.",
+            "1 collar con perla y dije\n" +
+            "1 manilla Besties Three Friends X3\n" +
+            "1 paquete de 5 photocards\n" +
+            "1 separador de libro",
         price: 25000,
-        emoji: "👑"
+        emoji: "🐰"
     },
-
     {
         id: 106,
         name: "VIP",
         description:
-            "Incluye: 4 manillas + 3 collares + 2 láminas de stickers + 15 photocards totalmente laminadas + 5 flores eternas + 1 postal + 2 separadores de libros + 2 Photo Strip + 5 fotos carnet.",
+            "4 manillas\n" +
+            "3 collares\n" +
+            "2 láminas de stickers\n" +
+            "15 photocards totalmente laminadas\n" +
+            "5 flores eternas\n" +
+            "1 postal\n" +
+            "2 separadores de libros\n" +
+            "2 photo strip\n" +
+            "5 photo carnet",
         price: 55000,
-        emoji: "💎"
+        emoji: "👑"
     }
-
 ];
 
-
-/* =====================================================
-   RAMOS
-===================================================== */
+// ==========================================
+// RAMOS
+// ==========================================
 
 const bouquets = [
-
     {
         id: 201,
         name: "Ramo Básico",
         description:
-            "Incluye: 5 photocards + 10 flores eternas. Las photocards y el estilo de las flores son totalmente personalizados.",
+            "5 photocards + 10 flores eternas.\n" +
+            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
         price: 25000,
         emoji: "🌷"
     },
-
     {
         id: 202,
         name: "Ramo Outro",
         description:
-            "Incluye: 10 photocards + 15 flores eternas. Las photocards y el estilo de las flores son totalmente personalizados.",
+            "10 photocards + 15 flores eternas.\n" +
+            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
         price: 35000,
         emoji: "🌸"
     },
-
     {
         id: 203,
         name: "Ramo Kookie",
         description:
-            "Incluye: 14 photocards + 20 flores eternas. Las photocards y el estilo de las flores son totalmente personalizados.",
+            "14 photocards + 20 flores eternas.\n" +
+            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
         price: 45000,
-        emoji: "💜"
+        emoji: "💐"
     },
-
     {
         id: 204,
         name: "Ramo VIP",
         description:
-            "Ramo totalmente personalizado. Tú eliges la cantidad de photocards, la cantidad de flores eternas y el estilo de las flores.",
-        price: 0,
+            "Cantidad de photocards personalizada + cantidad de flores personalizada.\n" +
+            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
+        price: null,
         emoji: "👑",
         custom: true
     }
-
 ];
 
-
-/* =====================================================
-   CARRITO
-===================================================== */
-
-let cart =
-    JSON.parse(
-        localStorage.getItem("kookiePopCart")
-    ) || [];
-
-
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const productsGrid =
-    document.getElementById("productsGrid");
-
-const combosGrid =
-    document.getElementById("combosGrid");
-
-const bouquetsGrid =
-    document.getElementById("bouquetsGrid");
-
-const galleryGrid =
-    document.getElementById("galleryGrid");
-
-const cartDrawer =
-    document.getElementById("cartDrawer");
-
-const cartOverlay =
-    document.getElementById("cartOverlay");
-
-const cartItems =
-    document.getElementById("cartItems");
-
-const cartTotal =
-    document.getElementById("cartTotal");
-
-const cartCount =
-    document.getElementById("cartCount");
-
-const toast =
-    document.getElementById("toast");
-
-
-/* =====================================================
-   DINERO
-===================================================== */
-
-function money(number) {
-
-    return new Intl.NumberFormat(
-        "es-CO",
-        {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0
-        }
-    ).format(number);
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-function showToast(message) {
-
-    toast.textContent =
-        "✦ " + message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 2200);
-
-}
-
-
-/* =====================================================
-   PRODUCTOS
-===================================================== */
-
-function renderProducts() {
-
-    productsGrid.innerHTML = "";
-
-    products.forEach(product => {
-
-        const card =
-            document.createElement("article");
-
-        card.className =
-            "product-card";
-
-        card.innerHTML = `
-
-            <div class="product-image">
-                ${product.emoji}
-            </div>
-
-            <h3>
-                ${product.name}
-            </h3>
-
-            <p>
-                ${product.description}
-            </p>
-
-            <div class="product-price">
-                ${money(product.price)}
-            </div>
-
-            <button
-                class="product-button"
-                onclick="addProduct(${product.id})">
-
-                🛒 Agregar al carrito
-
-            </button>
-
-        `;
-
-        productsGrid.appendChild(card);
-
-    });
-
-}
-
-
-/* =====================================================
-   COMBOS
-===================================================== */
-
-function renderCombos() {
-
-    combosGrid.innerHTML = "";
-
-    combos.forEach((combo, index) => {
-
-        const card =
-            document.createElement("article");
-
-        card.className =
-            "combo-card";
-
-        card.innerHTML = `
-
-            ${
-                index === 0
-                ?
-                `<span class="combo-tag">
-                    ✦ FAVORITO ✦
-                 </span>`
-                :
-                ""
-            }
-
-            <div class="combo-icon">
-                ${combo.emoji}
-            </div>
-
-            <h3>
-                Combo "${combo.name}"
-            </h3>
-
-            <p>
-                ${combo.description}
-            </p>
-
-            <div class="combo-price">
-                ${money(combo.price)}
-            </div>
-
-            <button
-                class="product-button"
-                onclick="addCombo(${combo.id})">
-
-                🛒 Agregar al carrito
-
-            </button>
-
-        `;
-
-        combosGrid.appendChild(card);
-
-    });
-
-}
-
-
-/* =====================================================
-   RAMOS
-===================================================== */
-
-function renderBouquets() {
-
-    bouquetsGrid.innerHTML = "";
-
-    bouquets.forEach(bouquet => {
-
-        const card =
-            document.createElement("article");
-
-        card.className =
-            "bouquet";
-
-        if (bouquet.custom) {
-
-            card.innerHTML = `
-
-                <div class="bouquet-visual">
-                    ${bouquet.emoji}
-                </div>
-
-                <h3>
-                    ${bouquet.name}
-                </h3>
-
-                <p>
-                    ${bouquet.description}
-                </p>
-
-                <div class="combo-price">
-                    Cotizar
-                </div>
-
-                <button
-                    class="product-button"
-                    onclick="customBouquet()">
-
-                    💬 Personalizar
-
-                </button>
-
-            `;
-
-        } else {
-
-            card.innerHTML = `
-
-                <div class="bouquet-visual">
-                    ${bouquet.emoji}
-                </div>
-
-                <h3>
-                    ${bouquet.name}
-                </h3>
-
-                <p>
-                    ${bouquet.description}
-                </p>
-
-                <div class="combo-price">
-                    ${money(bouquet.price)}
-                </div>
-
-                <button
-                    class="product-button"
-                    onclick="addBouquet(${bouquet.id})">
-
-                    🛒 Agregar al carrito
-
-                </button>
-
-            `;
-
-        }
-
-        bouquetsGrid.appendChild(card);
-
-    });
-
-}
-
-
-/* =====================================================
-   AGREGAR PRODUCTO
-===================================================== */
-
-function addProduct(id) {
-
-    const product =
-        products.find(
-            item => item.id === id
-        );
-
-    if (!product) return;
-
-    addToCart(
-        product.name,
-        product.price
-    );
-
-}
-
-
-/* =====================================================
-   AGREGAR COMBO
-===================================================== */
-
-function addCombo(id) {
-
-    const combo =
-        combos.find(
-            item => item.id === id
-        );
-
-    if (!combo) return;
-
-    addToCart(
-        `Combo ${combo.name}`,
-        combo.price
-    );
-
-}
-
-
-/* =====================================================
-   AGREGAR RAMO
-===================================================== */
-
-function addBouquet(id) {
-
-    const bouquet =
-        bouquets.find(
-            item => item.id === id
-        );
-
-    if (!bouquet) return;
-
-    addToCart(
-        bouquet.name,
-        bouquet.price
-    );
-
-}
-
-
-/* =====================================================
-   AGREGAR AL CARRITO
-===================================================== */
-
-function addToCart(name, price) {
-
-    const existing =
-        cart.find(
-            item => item.name === name
-        );
-
-    if (existing) {
-
-        existing.quantity++;
-
-    } else {
-
-        cart.push({
-
-            name: name,
-
-            price: price,
-
-            quantity: 1
-
-        });
-
-    }
-
-    saveCart();
-
-    showToast(
-        `${name} agregado al carrito 💜`
-    );
-
-}
-
-
-/* =====================================================
-   GUARDAR
-===================================================== */
-
-function saveCart() {
-
-    localStorage.setItem(
-        "kookiePopCart",
-        JSON.stringify(cart)
-    );
-
-    renderCart();
-
-}
-
-
-/* =====================================================
-   CARRITO
-===================================================== */
-
-function renderCart() {
-
-    cartItems.innerHTML = "";
-
-    if (cart.length === 0) {
-
-        cartItems.innerHTML = `
-
-            <div class="empty-cart">
-
-                <div style="font-size:50px;">
-                    🛒
-                </div>
-
-                <p>
-                    Tu carrito está vacío.
-                </p>
-
-                <small>
-                    Agrega algo de Kookie Pop 💜
-                </small>
-
-            </div>
-
-        `;
-
-        cartTotal.textContent =
-            money(0);
-
-        cartCount.textContent =
-            "0";
-
-        return;
-    }
-
-
-    let total = 0;
-
-    let quantityTotal = 0;
-
-
-    cart.forEach(
-        (item, index) => {
-
-            const subtotal =
-                item.price *
-                item.quantity;
-
-            total += subtotal;
-
-            quantityTotal +=
-                item.quantity;
-
-
-            const div =
-                document.createElement("div");
-
-            div.className =
-                "cart-item";
-
-
-            div.innerHTML = `
-
-                <div>
-
-                    <h4>
-                        ${item.name}
-                    </h4>
-
-                    <div class="cart-item-price">
-                        ${money(item.price)}
-                    </div>
-
-                    <button
-                        class="remove-item"
-                        onclick="removeItem(${index})">
-
-                        🗑️ Eliminar
-
-                    </button>
-
-                </div>
-
-
-                <div class="quantity">
-
-                    <button
-                        onclick="changeQuantity(${index}, -1)">
-
-                        −
-
-                    </button>
-
-                    <strong>
-                        ${item.quantity}
-                    </strong>
-
-                    <button
-                        onclick="changeQuantity(${index}, 1)">
-
-                        +
-
-                    </button>
-
-                </div>
-
-            `;
-
-
-            cartItems.appendChild(div);
-
-        }
-    );
-
-
-    cartTotal.textContent =
-        money(total);
-
-    cartCount.textContent =
-        quantityTotal;
-
-}
-
-
-/* =====================================================
-   CAMBIAR CANTIDAD
-===================================================== */
-
-function changeQuantity(
-    index,
-    amount
-) {
-
-    if (!cart[index]) return;
-
-    cart[index].quantity +=
-        amount;
-
-
-    if (
-        cart[index].quantity <= 0
-    ) {
-
-        cart.splice(
-            index,
-            1
-        );
-
-    }
-
-
-    saveCart();
-
-}
-
-
-/* =====================================================
-   ELIMINAR
-===================================================== */
-
-function removeItem(index) {
-
-    cart.splice(
-        index,
-        1
-    );
-
-    saveCart();
-
-    showToast(
-        "Producto eliminado"
-    );
-
-}
-
-
-/* =====================================================
-   ABRIR CARRITO
-===================================================== */
-
-function openCart() {
-
-    cartDrawer.classList.add(
-        "open"
-    );
-
-    cartOverlay.classList.add(
-        "show"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-/* =====================================================
-   CERRAR CARRITO
-===================================================== */
-
-function closeCart() {
-
-    cartDrawer.classList.remove(
-        "open"
-    );
-
-    cartOverlay.classList.remove(
-        "show"
-    );
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =====================================================
-   VACIAR
-===================================================== */
-
-function clearCart() {
-
-    if (cart.length === 0) return;
-
-    cart = [];
-
-    saveCart();
-
-    showToast(
-        "Carrito vacío 🛒"
-    );
-
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-function sendOrder() {
-
-    if (cart.length === 0) {
-
-        showToast(
-            "Primero agrega algo al carrito 🛒"
-        );
-
-        return;
-    }
-
-
-    let message =
-        "✨ PEDIDO KOOKIE POP ✨\n\n";
-
-
-    let total = 0;
-
-
-    cart.forEach(item => {
-
-        const subtotal =
-            item.price *
-            item.quantity;
-
-        total += subtotal;
-
-        message +=
-            `• ${item.name} x${item.quantity} — ${money(subtotal)}\n`;
-
-    });
-
-
-    message +=
-        `\n💜 TOTAL: ${money(total)}`;
-
-
-    message +=
-        "\n\nHola Kookie Pop 💜 quiero realizar este pedido.";
-
-
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =====================================================
-   PERSONALIZAR
-===================================================== */
-
-function personalize() {
-
-    const message =
-        "Hola Kookie Pop 💜\n\n" +
-        "Quiero personalizar un pedido.\n\n" +
-        "Quiero elegir grupo/artista, colores, " +
-        "photocards y diseño.";
-
-
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =====================================================
-   RAMO VIP
-===================================================== */
-
-function customBouquet() {
-
-    const message =
-        "Hola Kookie Pop 🌸💜\n\n" +
-        "Quiero cotizar un Ramo VIP personalizado.\n\n" +
-        "Quiero elegir la cantidad de photocards, " +
-        "flores y el estilo.";
-
-
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =====================================================
-   ROSA
-===================================================== */
-
-function customRose() {
-
-    const message =
-        "Hola Kookie Pop 🌹💜\n\n" +
-        "Quiero información sobre la Rosa personalizada.\n\n" +
-        "Quiero conocer las opciones disponibles.";
-
-
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =====================================================
-   GALERÍA
-===================================================== */
-
-const defaultGallery = [
-
+// ==========================================
+// GALERÍA
+// ==========================================
+
+const galleryImages = [
     "assets/foto1.jpg",
     "assets/foto2.jpg",
     "assets/foto3.jpg",
     "assets/foto4.jpg",
     "assets/foto5.jpg",
     "assets/foto6.jpg"
-
 ];
 
+// ==========================================
+// CARRITO
+// ==========================================
+
+let cart = JSON.parse(localStorage.getItem("kookiePopCart")) || [];
+
+// ==========================================
+// ELEMENTOS DEL HTML
+// ==========================================
+
+const productsGrid = document.getElementById("productsGrid");
+const combosGrid = document.getElementById("combosGrid");
+const bouquetsGrid = document.getElementById("bouquetsGrid");
+const galleryGrid = document.getElementById("galleryGrid");
+
+const openCartButton = document.getElementById("openCart");
+const closeCartButton = document.getElementById("closeCart");
+const cartOverlay = document.getElementById("cartOverlay");
+const cartDrawer = document.getElementById("cartDrawer");
+const cartItems = document.getElementById("cartItems");
+const cartTotal = document.getElementById("cartTotal");
+const cartCount = document.getElementById("cartCount");
+
+const sendOrderButton = document.getElementById("sendOrder");
+const clearCartButton = document.getElementById("clearCart");
+
+const personalizeButton = document.getElementById("personalizeButton");
+
+const whatsappLink = document.getElementById("whatsappLink");
+
+const adminButton = document.getElementById("adminButton");
+const adminModal = document.getElementById("adminModal");
+const closeAdmin = document.getElementById("closeAdmin");
+const adminPassword = document.getElementById("adminPassword");
+const loginAdmin = document.getElementById("loginAdmin");
+const adminError = document.getElementById("adminError");
+
+const adminPanel = document.getElementById("adminPanel");
+const closePanel = document.getElementById("closePanel");
+const adminImages = document.getElementById("adminImages");
+const adminPreview = document.getElementById("adminPreview");
+const logoutAdmin = document.getElementById("logoutAdmin");
+
+const toastElement = document.getElementById("toast");
+
+// ==========================================
+// FORMATO DE DINERO
+// ==========================================
+
+function money(value) {
+    if (value === null || value === undefined) {
+        return "Personalizado";
+    }
+
+    return new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        maximumFractionDigits: 0
+    }).format(value);
+}
+
+// ==========================================
+// TOAST
+// ==========================================
+
+function toast(message) {
+    if (!toastElement) return;
+
+    toastElement.textContent = message;
+    toastElement.classList.add("show");
+
+    setTimeout(() => {
+        toastElement.classList.remove("show");
+    }, 2500);
+}
+
+// ==========================================
+// GUARDAR CARRITO
+// ==========================================
+
+function saveCart() {
+    localStorage.setItem("kookiePopCart", JSON.stringify(cart));
+}
+
+// ==========================================
+// RENDER PRODUCTOS
+// ==========================================
+
+function renderProducts() {
+    if (!productsGrid) return;
+
+    productsGrid.innerHTML = "";
+
+    products.forEach(product => {
+        const card = document.createElement("article");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <div class="product-image">
+                <span>${product.emoji}</span>
+            </div>
+
+            <div class="product-content">
+                <h3>${product.name}</h3>
+
+                <p>${product.description}</p>
+
+                <div class="product-bottom">
+                    <strong>${money(product.price)}</strong>
+
+                    <button
+                        class="add-button"
+                        onclick="addProduct(${product.id})">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        `;
+
+        productsGrid.appendChild(card);
+    });
+}
+
+// ==========================================
+// RENDER COMBOS
+// ==========================================
+
+function renderCombos() {
+    if (!combosGrid) return;
+
+    combosGrid.innerHTML = "";
+
+    combos.forEach(combo => {
+        const card = document.createElement("article");
+
+        card.className = "combo-card";
+
+        const description = combo.description.replace(/\n/g, "<br>");
+
+        card.innerHTML = `
+            <div class="combo-image">
+                <span>${combo.emoji}</span>
+            </div>
+
+            <div class="combo-content">
+                <span class="combo-label">COMBO</span>
+
+                <h3>Combo ${combo.name}</h3>
+
+                <p>${description}</p>
+
+                <div class="product-bottom">
+                    <strong>${money(combo.price)}</strong>
+
+                    <button
+                        class="add-button"
+                        onclick="addCombo(${combo.id})">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        `;
+
+        combosGrid.appendChild(card);
+    });
+}
+
+// ==========================================
+// RENDER RAMOS
+// ==========================================
+
+function renderBouquets() {
+    if (!bouquetsGrid) return;
+
+    bouquetsGrid.innerHTML = "";
+
+    bouquets.forEach(bouquet => {
+        const card = document.createElement("article");
+
+        card.className = "bouquet-card";
+
+        const description = bouquet.description.replace(/\n/g, "<br>");
+
+        const button = bouquet.custom
+            ? `
+                <button
+                    class="add-button"
+                    onclick="customBouquet()">
+                    Personalizar
+                </button>
+            `
+            : `
+                <button
+                    class="add-button"
+                    onclick="addBouquet(${bouquet.id})">
+                    Agregar
+                </button>
+            `;
+
+        card.innerHTML = `
+            <div class="bouquet-image">
+                <span>${bouquet.emoji}</span>
+            </div>
+
+            <div class="bouquet-content">
+                <h3>${bouquet.name}</h3>
+
+                <p>${description}</p>
+
+                <div class="product-bottom">
+                    <strong>
+                        ${bouquet.custom ? "Precio personalizado" : money(bouquet.price)}
+                    </strong>
+
+                    ${button}
+                </div>
+            </div>
+        `;
+
+        bouquetsGrid.appendChild(card);
+    });
+}
+
+// ==========================================
+// RENDER GALERÍA
+// ==========================================
 
 function renderGallery() {
+    if (!galleryGrid) return;
 
     galleryGrid.innerHTML = "";
 
-    defaultGallery.forEach(
-        src => {
+    galleryImages.forEach((image, index) => {
+        const item = document.createElement("div");
 
-            const img =
-                document.createElement("img");
+        item.className = "gallery-item";
 
-            img.src = src;
+        item.innerHTML = `
+            <img
+                src="${image}"
+                alt="Producto Kookie Pop ${index + 1}"
+                loading="lazy"
+                onerror="this.parentElement.classList.add('image-error')"
+            >
+        `;
 
-            img.alt =
-                "Diseño Kookie Pop";
-
-            img.onerror =
-                function () {
-
-                    this.style.display =
-                        "none";
-
-                };
-
-
-            galleryGrid.appendChild(img);
-
-        }
-    );
-
+        galleryGrid.appendChild(item);
+    });
 }
 
+// ==========================================
+// AGREGAR PRODUCTO
+// ==========================================
 
-renderGallery();
+function addProduct(id) {
+    const product = products.find(item => item.id === id);
 
+    if (!product) return;
 
-/* =====================================================
-   ADMIN
-===================================================== */
+    addToCart({
+        id: product.id,
+        type: "product",
+        name: product.name,
+        price: product.price,
+        emoji: product.emoji
+    });
+}
 
-const adminModal =
-    document.getElementById(
-        "adminModal"
+// ==========================================
+// AGREGAR COMBO
+// ==========================================
+
+function addCombo(id) {
+    const combo = combos.find(item => item.id === id);
+
+    if (!combo) return;
+
+    addToCart({
+        id: combo.id,
+        type: "combo",
+        name: `Combo ${combo.name}`,
+        price: combo.price,
+        emoji: combo.emoji
+    });
+}
+
+// ==========================================
+// AGREGAR RAMO
+// ==========================================
+
+function addBouquet(id) {
+    const bouquet = bouquets.find(item => item.id === id);
+
+    if (!bouquet || bouquet.custom) return;
+
+    addToCart({
+        id: bouquet.id,
+        type: "bouquet",
+        name: bouquet.name,
+        price: bouquet.price,
+        emoji: bouquet.emoji
+    });
+}
+
+// ==========================================
+// FUNCIÓN GENERAL DEL CARRITO
+// ==========================================
+
+function addToCart(item) {
+    const existing = cart.find(
+        cartItem =>
+            cartItem.id === item.id &&
+            cartItem.type === item.type
     );
 
-const adminPanel =
-    document.getElementById(
-        "adminPanel"
-    );
-
-const adminPassword =
-    document.getElementById(
-        "adminPassword"
-    );
-
-const adminError =
-    document.getElementById(
-        "adminError"
-    );
-
-const adminImages =
-    document.getElementById(
-        "adminImages"
-    );
-
-const adminPreview =
-    document.getElementById(
-        "adminPreview"
-    );
-
-
-document
-    .getElementById("adminButton")
-    .addEventListener(
-        "click",
-        () => {
-
-            adminModal.classList.add(
-                "show"
-            );
-
-            adminPassword.focus();
-
-        }
-    );
-
-
-document
-    .getElementById("closeAdmin")
-    .addEventListener(
-        "click",
-        () => {
-
-            adminModal.classList.remove(
-                "show"
-            );
-
-        }
-    );
-
-
-document
-    .getElementById("loginAdmin")
-    .addEventListener(
-        "click",
-        loginAdmin
-    );
-
-
-adminPassword.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            loginAdmin();
-
-        }
-
-    }
-);
-
-
-function loginAdmin() {
-
-    if (
-        adminPassword.value ===
-        ADMIN_PASSWORD
-    ) {
-
-        adminModal.classList.remove(
-            "show"
-        );
-
-        adminPanel.classList.add(
-            "show"
-        );
-
-        adminError.textContent =
-            "";
-
-        adminPassword.value =
-            "";
-
+    if (existing) {
+        existing.quantity += 1;
     } else {
-
-        adminError.textContent =
-            "❌ Contraseña incorrecta.";
-
+        cart.push({
+            ...item,
+            quantity: 1
+        });
     }
 
+    saveCart();
+    renderCart();
+
+    toast(`${item.name} agregado al carrito 🛒`);
 }
 
+// ==========================================
+// RENDER CARRITO
+// ==========================================
 
-/* =====================================================
-   PANEL ADMIN
-===================================================== */
+function renderCart() {
+    if (!cartItems) return;
 
-document
-    .getElementById("closePanel")
-    .addEventListener(
-        "click",
-        () => {
+    cartItems.innerHTML = "";
 
-            adminPanel.classList.remove(
-                "show"
-            );
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <div>🛒</div>
+                <p>Tu carrito está vacío.</p>
+                <small>Agrega tus productos favoritos de Kookie Pop.</small>
+            </div>
+        `;
 
+        if (cartTotal) {
+            cartTotal.textContent = money(0);
         }
-    );
 
-
-document
-    .getElementById("logoutAdmin")
-    .addEventListener(
-        "click",
-        () => {
-
-            adminPanel.classList.remove(
-                "show"
-            );
-
-            adminPreview.innerHTML =
-                "";
-
-        }
-    );
-
-
-adminImages.addEventListener(
-    "change",
-    event => {
-
-        adminPreview.innerHTML =
-            "";
-
-        const files =
-            Array.from(
-                event.target.files
-            );
-
-
-        files.forEach(file => {
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                e => {
-
-                    const img =
-                        document.createElement(
-                            "img"
-                        );
-
-                    img.src =
-                        e.target.result;
-
-                    img.alt =
-                        "Vista previa";
-
-                    adminPreview.appendChild(
-                        img
-                    );
-
-                };
-
-
-            reader.readAsDataURL(file);
-
-        });
-
+        updateCartCount();
+        return;
     }
-);
 
+    let total = 0;
 
-/* =====================================================
-   EVENTOS
-===================================================== */
+    cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
 
-document
-    .getElementById("openCart")
-    .addEventListener(
-        "click",
-        openCart
+        total += subtotal;
+
+        const row = document.createElement("div");
+
+        row.className = "cart-item";
+
+        row.innerHTML = `
+            <div class="cart-item-icon">
+                ${item.emoji || "🛍️"}
+            </div>
+
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+
+                <p>${money(item.price)} c/u</p>
+
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity(${index}, -1)">−</button>
+
+                    <span>${item.quantity}</span>
+
+                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="cart-item-right">
+                <strong>${money(subtotal)}</strong>
+
+                <button
+                    class="remove-item"
+                    onclick="removeFromCart(${index})"
+                    aria-label="Eliminar">
+                    ×
+                </button>
+            </div>
+        `;
+
+        cartItems.appendChild(row);
+    });
+
+    if (cartTotal) {
+        cartTotal.textContent = money(total);
+    }
+
+    updateCartCount();
+}
+
+// ==========================================
+// CONTADOR DEL CARRITO
+// ==========================================
+
+function updateCartCount() {
+    if (!cartCount) return;
+
+    const quantity = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
     );
 
+    cartCount.textContent = quantity;
 
-document
-    .getElementById("closeCart")
-    .addEventListener(
-        "click",
-        closeCart
-    );
+    if (quantity > 0) {
+        cartCount.style.display = "inline-flex";
+    } else {
+        cartCount.style.display = "none";
+    }
+}
 
+// ==========================================
+// CAMBIAR CANTIDAD
+// ==========================================
 
-cartOverlay.addEventListener(
-    "click",
-    closeCart
-);
+function changeQuantity(index, amount) {
+    if (!cart[index]) return;
 
+    cart[index].quantity += amount;
 
-document
-    .getElementById("sendOrder")
-    .addEventListener(
-        "click",
-        sendOrder
-    );
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
 
+    saveCart();
+    renderCart();
+}
 
-document
-    .getElementById("clearCart")
-    .addEventListener(
-        "click",
-        clearCart
-    );
+// ==========================================
+// ELIMINAR PRODUCTO
+// ==========================================
 
+function removeFromCart(index) {
+    if (!cart[index]) return;
 
-document
-    .getElementById("personalizeButton")
-    .addEventListener(
-        "click",
-        personalize
-    );
+    const removed = cart[index];
 
+    cart.splice(index, 1);
 
-document
-    .getElementById("whatsappLink")
-    .addEventListener(
-        "click",
-        personalize
-    );
+    saveCart();
+    renderCart();
 
+    toast(`${removed.name} eliminado`);
+}
 
-/* =====================================================
-   ESC PARA CERRAR
-===================================================== */
+// ==========================================
+// ABRIR CARRITO
+// ==========================================
 
-document.addEventListener(
-    "keydown",
-    event => {
+function openCart() {
+    if (cartOverlay) {
+        cartOverlay.classList.add("active");
+    }
 
-        if (
-            event.key === "Escape"
-        ) {
+    if (cartDrawer) {
+        cartDrawer.classList.add("active");
+    }
 
-            closeCart();
+    document.body.classList.add("cart-open");
+}
 
-            adminModal.classList.remove(
-                "show"
-            );
+// ==========================================
+// CERRAR CARRITO
+// ==========================================
 
-            adminPanel.classList.remove(
-                "show"
-            );
+function closeCart() {
+    if (cartOverlay) {
+        cartOverlay.classList.remove("active");
+    }
 
+    if (cartDrawer) {
+        cartDrawer.classList.remove("active");
+    }
+
+    document.body.classList.remove("cart-open");
+}
+
+// ==========================================
+// ENVIAR PEDIDO POR WHATSAPP
+// ==========================================
+
+function sendOrder() {
+    if (cart.length === 0) {
+        toast("Tu carrito está vacío 🛒");
+        return;
+    }
+
+    let message = "Hola Kookie Pop 💜✨\n";
+    message += "Quiero realizar el siguiente pedido:\n\n";
+
+    let total = 0;
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+
+        total += subtotal;
+
+        message += `• ${item.name} x${item.quantity} - ${money(subtotal)}\n`;
+    });
+
+    message += `\nTOTAL: ${money(total)}\n\n`;
+    message += "Quiero confirmar mi pedido. 💜";
+
+    const url =
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+}
+
+// ==========================================
+// VACIAR CARRITO
+// ==========================================
+
+function clearCart() {
+    if (cart.length === 0) {
+        toast("El carrito ya está vacío.");
+        return;
+    }
+
+    cart = [];
+
+    saveCart();
+    renderCart();
+
+    toast("Carrito vaciado 🛒");
+}
+
+// ==========================================
+// PERSONALIZACIÓN
+// ==========================================
+
+function personalize() {
+    const message =
+        "Hola Kookie Pop 💜✨ Quiero personalizar un producto. Quisiera saber cómo puedo enviar mi diseño y solicitar mi pedido.";
+
+    const url =
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+}
+
+// ==========================================
+// RAMO PERSONALIZADO
+// ==========================================
+
+function customBouquet() {
+    const message =
+        "Hola Kookie Pop 💐💜 Quiero cotizar un Ramo VIP personalizado. Quiero elegir la cantidad de photocards y flores, además del estilo.";
+
+    const url =
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+}
+
+// ==========================================
+// ADMIN - ABRIR MODAL
+// ==========================================
+
+function openAdminModal() {
+    if (!adminModal) return;
+
+    adminModal.classList.add("active");
+
+    if (adminPassword) {
+        adminPassword.value = "";
+        setTimeout(() => adminPassword.focus(), 100);
+    }
+
+    if (adminError) {
+        adminError.textContent = "";
+    }
+}
+
+// ==========================================
+// ADMIN - CERRAR MODAL
+// ==========================================
+
+function closeAdminModal() {
+    if (!adminModal) return;
+
+    adminModal.classList.remove("active");
+}
+
+// ==========================================
+// ADMIN - LOGIN
+// ==========================================
+
+function adminLogin() {
+    if (!adminPassword) return;
+
+    const password = adminPassword.value;
+
+    if (password === ADMIN_PASSWORD) {
+        closeAdminModal();
+
+        if (adminPanel) {
+            adminPanel.classList.add("active");
         }
 
+        if (adminError) {
+            adminError.textContent = "";
+        }
+
+        toast("Panel de administrador abierto 🔐");
+    } else {
+        if (adminError) {
+            adminError.textContent = "Contraseña incorrecta.";
+        }
+
+        adminPassword.value = "";
+        adminPassword.focus();
     }
-);
+}
 
+// ==========================================
+// ADMIN - CERRAR PANEL
+// ==========================================
 
-/* =====================================================
-   INICIO
-===================================================== */
+function closeAdminPanel() {
+    if (!adminPanel) return;
+
+    adminPanel.classList.remove("active");
+}
+
+// ==========================================
+// ADMIN - LOGOUT
+// ==========================================
+
+function logoutAdminPanel() {
+    closeAdminPanel();
+
+    if (adminPassword) {
+        adminPassword.value = "";
+    }
+
+    toast("Sesión cerrada.");
+}
+
+// ==========================================
+// ADMIN - PREVISUALIZAR IMÁGENES
+// ==========================================
+
+function previewAdminImages(event) {
+    if (!adminPreview) return;
+
+    adminPreview.innerHTML = "";
+
+    const files = Array.from(event.target.files || []);
+
+    if (files.length === 0) {
+        return;
+    }
+
+    files.forEach(file => {
+        if (!file.type.startsWith("image/")) {
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const wrapper = document.createElement("div");
+
+            wrapper.className = "admin-preview-item";
+
+            wrapper.innerHTML = `
+                <img
+                    src="${e.target.result}"
+                    alt="Vista previa"
+                >
+                <span>${file.name}</span>
+            `;
+
+            adminPreview.appendChild(wrapper);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+// ==========================================
+// EVENTOS DEL CARRITO
+// ==========================================
+
+if (openCartButton) {
+    openCartButton.addEventListener("click", openCart);
+}
+
+if (closeCartButton) {
+    closeCartButton.addEventListener("click", closeCart);
+}
+
+if (cartOverlay) {
+    cartOverlay.addEventListener("click", closeCart);
+}
+
+if (sendOrderButton) {
+    sendOrderButton.addEventListener("click", sendOrder);
+}
+
+if (clearCartButton) {
+    clearCartButton.addEventListener("click", clearCart);
+}
+
+// ==========================================
+// PERSONALIZAR
+// ==========================================
+
+if (personalizeButton) {
+    personalizeButton.addEventListener("click", personalize);
+}
+
+// ==========================================
+// WHATSAPP
+// ==========================================
+
+if (whatsappLink) {
+    whatsappLink.href = `https://wa.me/${WHATSAPP}`;
+    whatsappLink.target = "_blank";
+}
+
+// ==========================================
+// ADMIN
+// ==========================================
+
+if (adminButton) {
+    adminButton.addEventListener("click", openAdminModal);
+}
+
+if (closeAdmin) {
+    closeAdmin.addEventListener("click", closeAdminModal);
+}
+
+if (loginAdmin) {
+    loginAdmin.addEventListener("click", adminLogin);
+}
+
+if (closePanel) {
+    closePanel.addEventListener("click", closeAdminPanel);
+}
+
+if (logoutAdmin) {
+    logoutAdmin.addEventListener("click", logoutAdminPanel);
+}
+
+if (adminImages) {
+    adminImages.addEventListener("change", previewAdminImages);
+}
+
+// ==========================================
+// ENTER EN CONTRASEÑA
+// ==========================================
+
+if (adminPassword) {
+    adminPassword.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            adminLogin();
+        }
+    });
+}
+
+// ==========================================
+// ESC PARA CERRAR
+// ==========================================
+
+document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+
+    closeCart();
+    closeAdminModal();
+    closeAdminPanel();
+});
+
+// ==========================================
+// CLIC FUERA DE MODALES
+// ==========================================
+
+if (adminModal) {
+    adminModal.addEventListener("click", event => {
+        if (event.target === adminModal) {
+            closeAdminModal();
+        }
+    });
+}
+
+// ==========================================
+// INICIALIZAR
+// ==========================================
 
 renderProducts();
-
 renderCombos();
-
 renderBouquets();
-
+renderGallery();
 renderCart();
+
+console.log("Kookie Pop cargado correctamente 💜✨");
