@@ -1,43 +1,88 @@
-// ==========================================
-// KOOKIE POP - SCRIPT.JS
-// ==========================================
+/* =========================================================
+   KOOKIE POP - SCRIPT.JS
+   Carrito + WhatsApp + Reseñas + Galería + Admin
+========================================================= */
 
 const ADMIN_PASSWORD = "KookiePop2026";
 const WHATSAPP = "573205946508";
 
-// ==========================================
-// PRODUCTOS
-// ==========================================
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD9FP1B4c9NlHdINhf-Vb0oMvdaua32zSM",
+    authDomain: "kookiepop-ccfb9.firebaseapp.com",
+    projectId: "kookiepop-ccfb9",
+    storageBucket: "kookiepop-ccfb9.firebasestorage.app",
+    messagingSenderId: "397148978428",
+    appId: "1:397148978428:web:01db457b0b9946d42ceb79",
+    measurementId: "G-FBGWDK31LN"
+};
+
+let firebaseReady = false;
+let reviewsDB = null;
+let reviewsAuth = null;
+let galleryStorage = null;
+
+try {
+    if (typeof firebase !== "undefined") {
+
+        firebase.initializeApp(firebaseConfig);
+
+        reviewsDB = firebase.database();
+        reviewsAuth = firebase.auth();
+        galleryStorage = firebase.storage();
+
+        firebaseReady = true;
+
+        console.log("🔥 Firebase conectado correctamente.");
+
+    }
+} catch (error) {
+    console.error("❌ Error conectando Firebase:", error);
+}
+
+
+/* =========================================================
+   PRODUCTOS
+========================================================= */
 
 const products = [
+
     {
         id: 1,
-        name: "Photocards laminada X1",
+        name: "Photocard laminada X1",
         description: "1 photocard totalmente personalizada y laminada.",
         price: 1500,
         emoji: "📸"
     },
+
     {
         id: 2,
-        name: "Photocards sin laminar X1",
+        name: "Photocard sin laminar X1",
         description: "1 photocard totalmente personalizada.",
         price: 1000,
         emoji: "🖼️"
     },
+
     {
         id: 3,
         name: "Paquete de photocards X5",
         description: "5 photocards totalmente personalizadas.",
         price: 7000,
-        emoji: "📸"
+        emoji: "💿"
     },
+
     {
         id: 4,
         name: "Paquete de photocards X10",
         description: "10 photocards totalmente personalizadas.",
         price: 13000,
-        emoji: "💿"
+        emoji: "📸"
     },
+
     {
         id: 5,
         name: "Laminado sticker X15",
@@ -45,6 +90,7 @@ const products = [
         price: 10000,
         emoji: "✨"
     },
+
     {
         id: 6,
         name: "Foto carnet sin laminar X6",
@@ -52,6 +98,7 @@ const products = [
         price: 5000,
         emoji: "🪪"
     },
+
     {
         id: 7,
         name: "Foto strip X5",
@@ -59,6 +106,7 @@ const products = [
         price: 7000,
         emoji: "🎞️"
     },
+
     {
         id: 8,
         name: "Separador de libros X1",
@@ -66,6 +114,7 @@ const products = [
         price: 1500,
         emoji: "📖"
     },
+
     {
         id: 9,
         name: "Manilla X1",
@@ -73,6 +122,7 @@ const products = [
         price: 4000,
         emoji: "📿"
     },
+
     {
         id: 10,
         name: "Manilla Bestie Friend X2",
@@ -80,6 +130,7 @@ const products = [
         price: 7000,
         emoji: "🎀"
     },
+
     {
         id: 11,
         name: "Manilla Bestie Threefriend X3",
@@ -87,6 +138,7 @@ const products = [
         price: 10000,
         emoji: "🫶"
     },
+
     {
         id: 12,
         name: "Collar con perla X1",
@@ -94,6 +146,7 @@ const products = [
         price: 8000,
         emoji: "🤍"
     },
+
     {
         id: 13,
         name: "Collar con perla y dije X1",
@@ -101,950 +154,1735 @@ const products = [
         price: 10000,
         emoji: "💎"
     }
+
 ];
 
-// ==========================================
-// COMBOS
-// ==========================================
+
+/* =========================================================
+   COMBOS
+========================================================= */
 
 const combos = [
+
     {
         id: 101,
         name: "KOOKIE",
-        description:
-            "1 manilla\n" +
-            "1 photocard laminada\n" +
-            "1 separador de libro",
+        description: "1 manilla · 1 photocard laminada · 1 separador de libro",
         price: 6000,
         emoji: "🐰"
     },
+
     {
         id: 102,
         name: "K-POP",
-        description:
-            "1 paquete de 5 photocards\n" +
-            "1 foto strip X5",
+        description: "1 paquete de 5 photocards · 1 foto strip X5",
         price: 13000,
         emoji: "🎧"
     },
+
     {
         id: 103,
         name: "BESTIES",
-        description:
-            "1 Manilla Besties Three Friends X3\n" +
-            "1 paquete de 5 photocards",
+        description: "1 Manilla Besties Three Friends X3 · 1 paquete de 5 photocards",
         price: 15000,
         emoji: "🎀"
     },
+
     {
         id: 104,
         name: "HOBI",
-        description:
-            "1 collar con perla\n" +
-            "1 manilla\n" +
-            "1 photocard laminada",
+        description: "1 collar con perla · 1 manilla · 1 photocard laminada",
         price: 12000,
         emoji: "🌻"
     },
+
     {
         id: 105,
         name: "KOOKIE POP",
-        description:
-            "1 collar con perla y dije\n" +
-            "1 manilla Besties Three Friends X3\n" +
-            "1 paquete de 5 photocards\n" +
-            "1 separador de libro",
+        description: "1 collar con perla y dije · 1 manilla Besties Three Friends X3 · 1 paquete de 5 photocards · 1 separador",
         price: 25000,
         emoji: "🐰"
     },
+
     {
         id: 106,
         name: "VIP",
-        description:
-            "4 manillas\n" +
-            "3 collares\n" +
-            "2 láminas de stickers\n" +
-            "15 photocards totalmente laminadas\n" +
-            "5 flores eternas\n" +
-            "1 postal\n" +
-            "2 separadores de libros\n" +
-            "2 photo strip\n" +
-            "5 photo carnet",
+        description: "4 manillas · 3 collares · 2 láminas de stickers · 15 photocards laminadas · 5 flores eternas · 1 postal · 2 separadores · 2 photo strips · 5 fotos carnet",
         price: 55000,
         emoji: "👑"
     }
+
 ];
 
-// ==========================================
-// RAMOS
-// ==========================================
+
+/* =========================================================
+   RAMOS
+========================================================= */
 
 const bouquets = [
+
     {
         id: 201,
         name: "Ramo Básico",
-        description:
-            "5 photocards + 10 flores eternas.\n" +
-            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
+        description: "5 photocards + 10 flores eternas. Photocards y flores totalmente personalizadas.",
         price: 25000,
         emoji: "🌷"
     },
+
     {
         id: 202,
         name: "Ramo Outro",
-        description:
-            "10 photocards + 15 flores eternas.\n" +
-            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
+        description: "10 photocards + 15 flores eternas. Photocards y flores totalmente personalizadas.",
         price: 35000,
         emoji: "🌸"
     },
+
     {
         id: 203,
         name: "Ramo Kookie",
-        description:
-            "14 photocards + 20 flores eternas.\n" +
-            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
+        description: "14 photocards + 20 flores eternas. Photocards y flores totalmente personalizadas.",
         price: 45000,
         emoji: "💐"
     },
+
     {
         id: 204,
         name: "Ramo VIP",
-        description:
-            "Cantidad de photocards personalizada + cantidad de flores personalizada.\n" +
-            "Photocards totalmente personalizadas y estilo de flores totalmente personalizado.",
+        description: "Cantidad de photocards y flores totalmente personalizada.",
         price: null,
         emoji: "👑",
         custom: true
     }
+
 ];
 
-// ==========================================
-// GALERÍA
-// ==========================================
 
-const galleryImages = [
-    "assets/foto1.jpg",
-    "assets/foto2.jpg",
-    "assets/foto3.jpg",
-    "assets/foto4.jpg",
-    "assets/foto5.jpg",
-    "assets/foto6.jpg"
-];
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-// ==========================================
-// CARRITO
-// ==========================================
+let cart = JSON.parse(
+    localStorage.getItem("kookiePopCart") || "[]"
+);
 
-let cart = JSON.parse(localStorage.getItem("kookiePopCart")) || [];
+let selectedRating = 0;
+let adminFiles = [];
 
-// ==========================================
-// ELEMENTOS DEL HTML
-// ==========================================
 
-const productsGrid = document.getElementById("productsGrid");
-const combosGrid = document.getElementById("combosGrid");
-const bouquetsGrid = document.getElementById("bouquetsGrid");
-const galleryGrid = document.getElementById("galleryGrid");
+/* =========================================================
+   FUNCIONES CORTAS
+========================================================= */
 
-const openCartButton = document.getElementById("openCart");
-const closeCartButton = document.getElementById("closeCart");
-const cartOverlay = document.getElementById("cartOverlay");
-const cartDrawer = document.getElementById("cartDrawer");
-const cartItems = document.getElementById("cartItems");
-const cartTotal = document.getElementById("cartTotal");
-const cartCount = document.getElementById("cartCount");
+const $ = selector =>
+    document.querySelector(selector);
 
-const sendOrderButton = document.getElementById("sendOrder");
-const clearCartButton = document.getElementById("clearCart");
+const $$ = selector =>
+    [...document.querySelectorAll(selector)];
 
-const personalizeButton = document.getElementById("personalizeButton");
-
-const whatsappLink = document.getElementById("whatsappLink");
-
-const adminButton = document.getElementById("adminButton");
-const adminModal = document.getElementById("adminModal");
-const closeAdmin = document.getElementById("closeAdmin");
-const adminPassword = document.getElementById("adminPassword");
-const loginAdmin = document.getElementById("loginAdmin");
-const adminError = document.getElementById("adminError");
-
-const adminPanel = document.getElementById("adminPanel");
-const closePanel = document.getElementById("closePanel");
-const adminImages = document.getElementById("adminImages");
-const adminPreview = document.getElementById("adminPreview");
-const logoutAdmin = document.getElementById("logoutAdmin");
-
-const toastElement = document.getElementById("toast");
-
-// ==========================================
-// FORMATO DE DINERO
-// ==========================================
 
 function money(value) {
-    if (value === null || value === undefined) {
-        return "Personalizado";
-    }
-
-    return new Intl.NumberFormat("es-CO", {
-        style: "currency",
-        currency: "COP",
-        maximumFractionDigits: 0
-    }).format(value);
+    return `$${Number(value).toLocaleString("es-CO")}`;
 }
 
-// ==========================================
-// TOAST
-// ==========================================
+
+function safe(text) {
+
+    return String(text).replace(
+        /[&<>"']/g,
+        char => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        }[char])
+    );
+
+}
+
 
 function toast(message) {
-    if (!toastElement) return;
 
-    toastElement.textContent = message;
-    toastElement.classList.add("show");
+    const element = $("#toast");
 
-    setTimeout(() => {
-        toastElement.classList.remove("show");
-    }, 2500);
+    if (!element) return;
+
+    element.textContent = message;
+
+    element.classList.add("show");
+
+    clearTimeout(window.kookieToast);
+
+    window.kookieToast = setTimeout(() => {
+        element.classList.remove("show");
+    }, 2800);
+
 }
 
-// ==========================================
-// GUARDAR CARRITO
-// ==========================================
 
-function saveCart() {
-    localStorage.setItem("kookiePopCart", JSON.stringify(cart));
+/* =========================================================
+   TODOS LOS ARTÍCULOS
+========================================================= */
+
+function getAllItems() {
+
+    return [
+        ...products,
+        ...combos,
+        ...bouquets.filter(
+            item => item.price !== null
+        )
+    ];
+
 }
 
-// ==========================================
-// RENDER PRODUCTOS
-// ==========================================
 
-function renderProducts() {
-    if (!productsGrid) return;
+/* =========================================================
+   CREAR TARJETAS
+========================================================= */
 
-    productsGrid.innerHTML = "";
+function createCard(item, type) {
 
-    products.forEach(product => {
-        const card = document.createElement("article");
+    const price = item.custom
+        ? "Personalizado"
+        : money(item.price);
 
-        card.className = "product-card";
+    const buttonText = item.custom
+        ? "Consultar"
+        : "Agregar +";
 
-        card.innerHTML = `
-            <div class="product-image">
-                <span>${product.emoji}</span>
+    return `
+
+        <article class="product-card">
+
+            <div class="card-icon">
+                ${item.emoji}
             </div>
 
-            <div class="product-content">
-                <h3>${product.name}</h3>
+            <small>
+                ${type}
+            </small>
 
-                <p>${product.description}</p>
+            <h3>
+                ${safe(item.name)}
+            </h3>
 
-                <div class="product-bottom">
-                    <strong>${money(product.price)}</strong>
+            <p>
+                ${safe(item.description)}
+            </p>
 
-                    <button
-                        class="add-button"
-                        onclick="addProduct(${product.id})">
-                        Agregar
-                    </button>
-                </div>
-            </div>
-        `;
+            <div class="product-card-bottom">
 
-        productsGrid.appendChild(card);
-    });
-}
+                <strong class="price">
+                    ${price}
+                </strong>
 
-// ==========================================
-// RENDER COMBOS
-// ==========================================
-
-function renderCombos() {
-    if (!combosGrid) return;
-
-    combosGrid.innerHTML = "";
-
-    combos.forEach(combo => {
-        const card = document.createElement("article");
-
-        card.className = "combo-card";
-
-        const description = combo.description.replace(/\n/g, "<br>");
-
-        card.innerHTML = `
-            <div class="combo-image">
-                <span>${combo.emoji}</span>
-            </div>
-
-            <div class="combo-content">
-                <span class="combo-label">COMBO</span>
-
-                <h3>Combo ${combo.name}</h3>
-
-                <p>${description}</p>
-
-                <div class="product-bottom">
-                    <strong>${money(combo.price)}</strong>
-
-                    <button
-                        class="add-button"
-                        onclick="addCombo(${combo.id})">
-                        Agregar
-                    </button>
-                </div>
-            </div>
-        `;
-
-        combosGrid.appendChild(card);
-    });
-}
-
-// ==========================================
-// RENDER RAMOS
-// ==========================================
-
-function renderBouquets() {
-    if (!bouquetsGrid) return;
-
-    bouquetsGrid.innerHTML = "";
-
-    bouquets.forEach(bouquet => {
-        const card = document.createElement("article");
-
-        card.className = "bouquet-card";
-
-        const description = bouquet.description.replace(/\n/g, "<br>");
-
-        const button = bouquet.custom
-            ? `
                 <button
-                    class="add-button"
-                    onclick="customBouquet()">
-                    Personalizar
+                    class="add-to-cart"
+                    type="button"
+                    data-id="${item.id}"
+                >
+                    ${buttonText}
                 </button>
-            `
-            : `
-                <button
-                    class="add-button"
-                    onclick="addBouquet(${bouquet.id})">
-                    Agregar
-                </button>
-            `;
 
-        card.innerHTML = `
-            <div class="bouquet-image">
-                <span>${bouquet.emoji}</span>
             </div>
 
-            <div class="bouquet-content">
-                <h3>${bouquet.name}</h3>
+        </article>
 
-                <p>${description}</p>
+    `;
 
-                <div class="product-bottom">
-                    <strong>
-                        ${bouquet.custom ? "Precio personalizado" : money(bouquet.price)}
-                    </strong>
-
-                    ${button}
-                </div>
-            </div>
-        `;
-
-        bouquetsGrid.appendChild(card);
-    });
 }
 
-// ==========================================
-// RENDER GALERÍA
-// ==========================================
 
-function renderGallery() {
-    if (!galleryGrid) return;
+/* =========================================================
+   MOSTRAR CATÁLOGO
+========================================================= */
 
-    galleryGrid.innerHTML = "";
+function renderCatalog() {
 
-    galleryImages.forEach((image, index) => {
-        const item = document.createElement("div");
+    const productsGrid = $("#productsGrid");
+    const combosGrid = $("#combosGrid");
+    const bouquetsGrid = $("#bouquetsGrid");
 
-        item.className = "gallery-item";
+    if (productsGrid) {
 
-        item.innerHTML = `
-            <img
-                src="${image}"
-                alt="Producto Kookie Pop ${index + 1}"
-                loading="lazy"
-                onerror="this.parentElement.classList.add('image-error')"
-            >
-        `;
+        productsGrid.innerHTML =
+            products.map(
+                item => createCard(item, "PRODUCTO")
+            ).join("");
 
-        galleryGrid.appendChild(item);
+    }
+
+    if (combosGrid) {
+
+        combosGrid.innerHTML =
+            combos.map(
+                item => createCard(item, "COMBO")
+            ).join("");
+
+    }
+
+    if (bouquetsGrid) {
+
+        bouquetsGrid.innerHTML =
+            bouquets.map(
+                item => createCard(item, "RAMO")
+            ).join("");
+
+    }
+
+    $$(".add-to-cart").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            addToCart(
+                Number(button.dataset.id)
+            );
+
+        });
+
     });
+
 }
 
-// ==========================================
-// AGREGAR PRODUCTO
-// ==========================================
 
-function addProduct(id) {
-    const product = products.find(item => item.id === id);
+/* =========================================================
+   AGREGAR AL CARRITO
+========================================================= */
 
-    if (!product) return;
+function addToCart(id) {
 
-    addToCart({
-        id: product.id,
-        type: "product",
-        name: product.name,
-        price: product.price,
-        emoji: product.emoji
-    });
-}
+    const item =
+        getAllItems().find(
+            product => product.id === id
+        );
 
-// ==========================================
-// AGREGAR COMBO
-// ==========================================
+    if (!item) return;
 
-function addCombo(id) {
-    const combo = combos.find(item => item.id === id);
+    if (item.custom) {
 
-    if (!combo) return;
+        sendWhatsApp(
+            `Hola Kookie Pop 💜 Quiero cotizar el ${item.name}.`
+        );
 
-    addToCart({
-        id: combo.id,
-        type: "combo",
-        name: `Combo ${combo.name}`,
-        price: combo.price,
-        emoji: combo.emoji
-    });
-}
+        return;
 
-// ==========================================
-// AGREGAR RAMO
-// ==========================================
+    }
 
-function addBouquet(id) {
-    const bouquet = bouquets.find(item => item.id === id);
-
-    if (!bouquet || bouquet.custom) return;
-
-    addToCart({
-        id: bouquet.id,
-        type: "bouquet",
-        name: bouquet.name,
-        price: bouquet.price,
-        emoji: bouquet.emoji
-    });
-}
-
-// ==========================================
-// FUNCIÓN GENERAL DEL CARRITO
-// ==========================================
-
-function addToCart(item) {
-    const existing = cart.find(
-        cartItem =>
-            cartItem.id === item.id &&
-            cartItem.type === item.type
-    );
+    const existing =
+        cart.find(
+            product => product.id === id
+        );
 
     if (existing) {
-        existing.quantity += 1;
+
+        existing.qty++;
+
     } else {
+
         cart.push({
-            ...item,
-            quantity: 1
+            id: id,
+            qty: 1
         });
+
     }
 
     saveCart();
+
     renderCart();
 
-    toast(`${item.name} agregado al carrito 🛒`);
-}
-
-// ==========================================
-// RENDER CARRITO
-// ==========================================
-
-function renderCart() {
-    if (!cartItems) return;
-
-    cartItems.innerHTML = "";
-
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <div>🛒</div>
-                <p>Tu carrito está vacío.</p>
-                <small>Agrega tus productos favoritos de Kookie Pop.</small>
-            </div>
-        `;
-
-        if (cartTotal) {
-            cartTotal.textContent = money(0);
-        }
-
-        updateCartCount();
-        return;
-    }
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        const subtotal = item.price * item.quantity;
-
-        total += subtotal;
-
-        const row = document.createElement("div");
-
-        row.className = "cart-item";
-
-        row.innerHTML = `
-            <div class="cart-item-icon">
-                ${item.emoji || "🛍️"}
-            </div>
-
-            <div class="cart-item-info">
-                <h4>${item.name}</h4>
-
-                <p>${money(item.price)} c/u</p>
-
-                <div class="quantity-controls">
-                    <button onclick="changeQuantity(${index}, -1)">−</button>
-
-                    <span>${item.quantity}</span>
-
-                    <button onclick="changeQuantity(${index}, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="cart-item-right">
-                <strong>${money(subtotal)}</strong>
-
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${index})"
-                    aria-label="Eliminar">
-                    ×
-                </button>
-            </div>
-        `;
-
-        cartItems.appendChild(row);
-    });
-
-    if (cartTotal) {
-        cartTotal.textContent = money(total);
-    }
-
-    updateCartCount();
-}
-
-// ==========================================
-// CONTADOR DEL CARRITO
-// ==========================================
-
-function updateCartCount() {
-    if (!cartCount) return;
-
-    const quantity = cart.reduce(
-        (total, item) => total + item.quantity,
-        0
+    toast(
+        `✨ ${item.name} agregado`
     );
 
-    cartCount.textContent = quantity;
-
-    if (quantity > 0) {
-        cartCount.style.display = "inline-flex";
-    } else {
-        cartCount.style.display = "none";
-    }
 }
 
-// ==========================================
-// CAMBIAR CANTIDAD
-// ==========================================
 
-function changeQuantity(index, amount) {
-    if (!cart[index]) return;
+/* =========================================================
+   GUARDAR CARRITO
+========================================================= */
 
-    cart[index].quantity += amount;
+function saveCart() {
 
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
+    localStorage.setItem(
+        "kookiePopCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================================================
+   MOSTRAR CARRITO
+========================================================= */
+
+function renderCart() {
+
+    const container = $("#cartItems");
+
+    if (!container) return;
+
+    const allItems = getAllItems();
+
+    cart = cart.filter(row =>
+        allItems.some(item =>
+            item.id === row.id
+        )
+    );
+
+    if (!cart.length) {
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                <div>🛍️</div>
+
+                <h3>
+                    Tu carrito está vacío
+                </h3>
+
+                <p>
+                    Agrega tus favoritos para comenzar.
+                </p>
+
+            </div>
+
+        `;
+
+        if ($("#cartTotal"))
+            $("#cartTotal").textContent = "$0";
+
+        if ($("#cartCount"))
+            $("#cartCount").textContent = "0";
+
+        return;
+
+    }
+
+    let total = 0;
+    let quantity = 0;
+
+    container.innerHTML =
+        cart.map(row => {
+
+            const item =
+                allItems.find(
+                    product => product.id === row.id
+                );
+
+            if (!item) return "";
+
+            const subtotal =
+                item.price * row.qty;
+
+            total += subtotal;
+            quantity += row.qty;
+
+            return `
+
+                <div class="cart-item">
+
+                    <div class="cart-item-icon">
+                        ${item.emoji}
+                    </div>
+
+                    <div class="cart-info">
+
+                        <strong>
+                            ${safe(item.name)}
+                        </strong>
+
+                        <small>
+                            ${money(item.price)}
+                        </small>
+
+                        <div class="qty">
+
+                            <button
+                                type="button"
+                                data-qty-id="${item.id}"
+                                data-change="-1"
+                            >
+                                −
+                            </button>
+
+                            <b>
+                                ${row.qty}
+                            </b>
+
+                            <button
+                                type="button"
+                                data-qty-id="${item.id}"
+                                data-change="1"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="remove-item"
+                        data-remove-id="${item.id}"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+    if ($("#cartCount"))
+        $("#cartCount").textContent = quantity;
+
+    if ($("#cartTotal"))
+        $("#cartTotal").textContent = money(total);
+
+    $$("[data-qty-id]").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            changeQuantity(
+                Number(button.dataset.qtyId),
+                Number(button.dataset.change)
+            );
+
+        });
+
+    });
+
+    $$("[data-remove-id]").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            removeFromCart(
+                Number(button.dataset.removeId)
+            );
+
+        });
+
+    });
+
+    saveCart();
+
+}
+
+
+/* =========================================================
+   CANTIDAD
+========================================================= */
+
+function changeQuantity(id, change) {
+
+    const item =
+        cart.find(
+            product => product.id === id
+        );
+
+    if (!item) return;
+
+    item.qty += change;
+
+    if (item.qty <= 0) {
+
+        cart =
+            cart.filter(
+                product => product.id !== id
+            );
+
     }
 
     saveCart();
+
     renderCart();
+
 }
 
-// ==========================================
-// ELIMINAR PRODUCTO
-// ==========================================
 
-function removeFromCart(index) {
-    if (!cart[index]) return;
+/* =========================================================
+   ELIMINAR
+========================================================= */
 
-    const removed = cart[index];
+function removeFromCart(id) {
 
-    cart.splice(index, 1);
+    cart =
+        cart.filter(
+            item => item.id !== id
+        );
 
     saveCart();
+
     renderCart();
 
-    toast(`${removed.name} eliminado`);
+    toast("🗑️ Producto eliminado");
+
 }
 
-// ==========================================
-// ABRIR CARRITO
-// ==========================================
+
+/* =========================================================
+   CARRITO
+========================================================= */
 
 function openCart() {
-    if (cartOverlay) {
-        cartOverlay.classList.add("active");
-    }
 
-    if (cartDrawer) {
-        cartDrawer.classList.add("active");
-    }
+    $("#cartDrawer")
+        ?.classList.add("open");
 
-    document.body.classList.add("cart-open");
+    $("#cartOverlay")
+        ?.classList.add("show");
+
 }
 
-// ==========================================
-// CERRAR CARRITO
-// ==========================================
 
 function closeCart() {
-    if (cartOverlay) {
-        cartOverlay.classList.remove("active");
-    }
 
-    if (cartDrawer) {
-        cartDrawer.classList.remove("active");
-    }
+    $("#cartDrawer")
+        ?.classList.remove("open");
 
-    document.body.classList.remove("cart-open");
+    $("#cartOverlay")
+        ?.classList.remove("show");
+
 }
 
-// ==========================================
-// ENVIAR PEDIDO POR WHATSAPP
-// ==========================================
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function sendWhatsApp(message) {
+
+    const url =
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   ENVIAR PEDIDO
+========================================================= */
 
 function sendOrder() {
-    if (cart.length === 0) {
-        toast("Tu carrito está vacío 🛒");
+
+    if (!cart.length) {
+
+        toast(
+            "🛒 Tu carrito está vacío"
+        );
+
         return;
+
     }
 
-    let message = "Hola Kookie Pop 💜✨\n";
-    message += "Quiero realizar el siguiente pedido:\n\n";
+    const allItems =
+        getAllItems();
 
     let total = 0;
 
-    cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
+    const lines =
+        cart.map(row => {
 
-        total += subtotal;
+            const item =
+                allItems.find(
+                    product =>
+                        product.id === row.id
+                );
 
-        message += `• ${item.name} x${item.quantity} - ${money(subtotal)}\n`;
+            const subtotal =
+                item.price * row.qty;
+
+            total += subtotal;
+
+            return `• ${item.name} x${row.qty} — ${money(subtotal)}`;
+
+        });
+
+    const message = `
+
+Hola Kookie Pop 💜
+
+Quiero hacer este pedido:
+
+${lines.join("\n")}
+
+💰 Total: ${money(total)}
+
+Quiero confirmar disponibilidad y personalización.
+
+`.trim();
+
+    sendWhatsApp(message);
+
+}
+
+
+/* =========================================================
+   RESEÑAS - ESTRELLAS
+========================================================= */
+
+function setupReviewStars() {
+
+    const buttons =
+        $$("#reviewStars button");
+
+    buttons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                selectedRating =
+                    Number(
+                        button.dataset.rating
+                    );
+
+                buttons.forEach(star => {
+
+                    const value =
+                        Number(
+                            star.dataset.rating
+                        );
+
+                    star.classList.toggle(
+                        "active",
+                        value <= selectedRating
+                    );
+
+                });
+
+            }
+        );
+
     });
 
-    message += `\nTOTAL: ${money(total)}\n\n`;
-    message += "Quiero confirmar mi pedido. 💜";
-
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
 }
 
-// ==========================================
-// VACIAR CARRITO
-// ==========================================
 
-function clearCart() {
-    if (cart.length === 0) {
-        toast("El carrito ya está vacío.");
-        return;
-    }
+/* =========================================================
+   PUBLICAR RESEÑA
+========================================================= */
 
-    cart = [];
+async function publishReview() {
 
-    saveCart();
-    renderCart();
+    const nameInput =
+        $("#reviewName");
 
-    toast("Carrito vaciado 🛒");
-}
+    const textInput =
+        $("#reviewText");
 
-// ==========================================
-// PERSONALIZACIÓN
-// ==========================================
-
-function personalize() {
     const message =
-        "Hola Kookie Pop 💜✨ Quiero personalizar un producto. Quisiera saber cómo puedo enviar mi diseño y solicitar mi pedido.";
+        $("#reviewMessage");
 
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+    if (!nameInput ||
+        !textInput ||
+        !message) return;
 
-    window.open(url, "_blank");
-}
+    const name =
+        nameInput.value.trim();
 
-// ==========================================
-// RAMO PERSONALIZADO
-// ==========================================
+    const text =
+        textInput.value.trim();
 
-function customBouquet() {
-    const message =
-        "Hola Kookie Pop 💐💜 Quiero cotizar un Ramo VIP personalizado. Quiero elegir la cantidad de photocards y flores, además del estilo.";
+    if (name.length < 2) {
 
-    const url =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+        message.textContent =
+            "⚠️ Escribe tu nombre.";
 
-    window.open(url, "_blank");
-}
-
-// ==========================================
-// ADMIN - ABRIR MODAL
-// ==========================================
-
-function openAdminModal() {
-    if (!adminModal) return;
-
-    adminModal.classList.add("active");
-
-    if (adminPassword) {
-        adminPassword.value = "";
-        setTimeout(() => adminPassword.focus(), 100);
-    }
-
-    if (adminError) {
-        adminError.textContent = "";
-    }
-}
-
-// ==========================================
-// ADMIN - CERRAR MODAL
-// ==========================================
-
-function closeAdminModal() {
-    if (!adminModal) return;
-
-    adminModal.classList.remove("active");
-}
-
-// ==========================================
-// ADMIN - LOGIN
-// ==========================================
-
-function adminLogin() {
-    if (!adminPassword) return;
-
-    const password = adminPassword.value;
-
-    if (password === ADMIN_PASSWORD) {
-        closeAdminModal();
-
-        if (adminPanel) {
-            adminPanel.classList.add("active");
-        }
-
-        if (adminError) {
-            adminError.textContent = "";
-        }
-
-        toast("Panel de administrador abierto 🔐");
-    } else {
-        if (adminError) {
-            adminError.textContent = "Contraseña incorrecta.";
-        }
-
-        adminPassword.value = "";
-        adminPassword.focus();
-    }
-}
-
-// ==========================================
-// ADMIN - CERRAR PANEL
-// ==========================================
-
-function closeAdminPanel() {
-    if (!adminPanel) return;
-
-    adminPanel.classList.remove("active");
-}
-
-// ==========================================
-// ADMIN - LOGOUT
-// ==========================================
-
-function logoutAdminPanel() {
-    closeAdminPanel();
-
-    if (adminPassword) {
-        adminPassword.value = "";
-    }
-
-    toast("Sesión cerrada.");
-}
-
-// ==========================================
-// ADMIN - PREVISUALIZAR IMÁGENES
-// ==========================================
-
-function previewAdminImages(event) {
-    if (!adminPreview) return;
-
-    adminPreview.innerHTML = "";
-
-    const files = Array.from(event.target.files || []);
-
-    if (files.length === 0) {
         return;
+
     }
 
-    files.forEach(file => {
-        if (!file.type.startsWith("image/")) {
-            return;
+    if (selectedRating < 1) {
+
+        message.textContent =
+            "⭐ Selecciona una calificación.";
+
+        return;
+
+    }
+
+    if (text.length < 4) {
+
+        message.textContent =
+            "💬 Escribe tu reseña.";
+
+        return;
+
+    }
+
+    if (!firebaseReady) {
+
+        message.textContent =
+            "❌ Firebase no está conectado.";
+
+        return;
+
+    }
+
+    try {
+
+        message.textContent =
+            "⏳ Publicando...";
+
+        if (!reviewsAuth.currentUser) {
+
+            await reviewsAuth
+                .signInAnonymously();
+
         }
 
-        const reader = new FileReader();
+        await reviewsDB
+            .ref("reviews")
+            .push({
 
-        reader.onload = function(e) {
-            const wrapper = document.createElement("div");
+                name:
+                    name.substring(0, 30),
 
-            wrapper.className = "admin-preview-item";
+                rating:
+                    selectedRating,
 
-            wrapper.innerHTML = `
-                <img
-                    src="${e.target.result}"
-                    alt="Vista previa"
+                text:
+                    text.substring(0, 300),
+
+                createdAt:
+                    Date.now()
+
+            });
+
+        nameInput.value = "";
+        textInput.value = "";
+
+        selectedRating = 0;
+
+        $$("#reviewStars button")
+            .forEach(star => {
+
+                star.classList.remove(
+                    "active"
+                );
+
+            });
+
+        message.textContent =
+            "💜 ¡Reseña publicada para todos!";
+
+        toast(
+            "⭐ Reseña publicada"
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "❌ No se pudo publicar la reseña.";
+
+    }
+
+}
+
+
+/* =========================================================
+   CARGAR RESEÑAS
+========================================================= */
+
+function loadReviews() {
+
+    const container =
+        $("#reviewsContainer");
+
+    if (!container) return;
+
+    if (!firebaseReady) {
+
+        container.innerHTML = `
+
+            <div class="no-reviews">
+
+                ⚠️ Firebase no está conectado.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    reviewsDB
+        .ref("reviews")
+        .limitToLast(100)
+        .on(
+            "value",
+            snapshot => {
+
+                const data =
+                    snapshot.val() || {};
+
+                const reviews =
+                    Object.values(data)
+                        .sort(
+                            (a, b) =>
+                                (b.createdAt || 0) -
+                                (a.createdAt || 0)
+                        );
+
+                renderReviews(
+                    reviews
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   MOSTRAR RESEÑAS
+========================================================= */
+
+function renderReviews(reviews) {
+
+    const container =
+        $("#reviewsContainer");
+
+    if (!container) return;
+
+    if (!reviews.length) {
+
+        container.innerHTML = `
+
+            <div class="no-reviews">
+
+                💌
+
+                <br><br>
+
+                <strong>
+                    Aún no hay reseñas públicas.
+                </strong>
+
+                <br>
+
+                ¡Sé la primera en dejar una!
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML =
+        reviews.map(review => {
+
+            const name =
+                safe(
+                    review.name ||
+                    "Cliente"
+                );
+
+            const text =
+                safe(
+                    review.text ||
+                    ""
+                );
+
+            const rating =
+                Math.max(
+                    1,
+                    Math.min(
+                        5,
+                        Number(
+                            review.rating
+                        ) || 5
+                    )
+                );
+
+            const date =
+                review.createdAt
+                    ? new Date(
+                        review.createdAt
+                    ).toLocaleDateString(
+                        "es-CO"
+                    )
+                    : "";
+
+            return `
+
+                <article
+                    class="public-review-card"
                 >
-                <span>${file.name}</span>
+
+                    <div class="head">
+
+                        <div class="avatar">
+                            ${name
+                                .charAt(0)
+                                .toUpperCase()}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${name}
+                            </strong>
+
+                            <small>
+                                ${date}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stars">
+
+                        ${"★".repeat(rating)}
+
+                        <span
+                            style="color:#3e3845"
+                        >
+                            ${"★".repeat(
+                                5 - rating
+                            )}
+                        </span>
+
+                    </div>
+
+                    <p>
+                        ${text}
+                    </p>
+
+                </article>
+
             `;
 
-            adminPreview.appendChild(wrapper);
-        };
+        }).join("");
 
-        reader.readAsDataURL(file);
-    });
 }
 
-// ==========================================
-// EVENTOS DEL CARRITO
-// ==========================================
 
-if (openCartButton) {
-    openCartButton.addEventListener("click", openCart);
+/* =========================================================
+   GALERÍA
+========================================================= */
+
+function loadGallery() {
+
+    const gallery =
+        $("#galleryGrid");
+
+    if (!gallery) return;
+
+    if (!firebaseReady) {
+
+        showGalleryEmpty(
+            "Firebase todavía no está conectado."
+        );
+
+        return;
+
+    }
+
+    reviewsDB
+        .ref("gallery")
+        .limitToLast(100)
+        .on(
+            "value",
+            snapshot => {
+
+                const data =
+                    snapshot.val() || {};
+
+                const images =
+                    Object.values(data)
+                        .sort(
+                            (a, b) =>
+                                (b.createdAt || 0) -
+                                (a.createdAt || 0)
+                        );
+
+                renderGallery(
+                    images
+                );
+
+            }
+        );
+
 }
 
-if (closeCartButton) {
-    closeCartButton.addEventListener("click", closeCart);
+
+/* =========================================================
+   MOSTRAR GALERÍA
+========================================================= */
+
+function renderGallery(images) {
+
+    const gallery =
+        $("#galleryGrid");
+
+    if (!gallery) return;
+
+    if (!images.length) {
+
+        showGalleryEmpty(
+            "Todavía no hay fotos. Sube las primeras desde el panel administrador."
+        );
+
+        return;
+
+    }
+
+    gallery.innerHTML =
+        images.map(image => {
+
+            return `
+
+                <a
+                    href="${safe(image.url)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <img
+                        src="${safe(image.url)}"
+                        alt="Diseño Kookie Pop"
+                        loading="lazy"
+                        onerror="this.parentElement.remove()"
+                    >
+
+                </a>
+
+            `;
+
+        }).join("");
+
 }
 
-if (cartOverlay) {
-    cartOverlay.addEventListener("click", closeCart);
+
+/* =========================================================
+   GALERÍA VACÍA
+========================================================= */
+
+function showGalleryEmpty(message) {
+
+    const gallery =
+        $("#galleryGrid");
+
+    if (!gallery) return;
+
+    gallery.innerHTML = `
+
+        <div
+            class="gallery-empty"
+            style="grid-column:1/-1"
+        >
+
+            <div class="gallery-empty-icon">
+                📸
+            </div>
+
+            <h3>
+                Galería de Kookie Pop
+            </h3>
+
+            <p>
+                ${safe(message)}
+            </p>
+
+        </div>
+
+    `;
+
 }
 
-if (sendOrderButton) {
-    sendOrderButton.addEventListener("click", sendOrder);
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+function setupAdmin() {
+
+    $("#adminButton")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                $("#adminModal")
+                    ?.classList.add("show");
+
+            }
+        );
+
+    $("#closeAdmin")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                $("#adminModal")
+                    ?.classList.remove("show");
+
+            }
+        );
+
+    $("#loginAdmin")
+        ?.addEventListener(
+            "click",
+            loginAdmin
+        );
+
+    $("#adminPassword")
+        ?.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    loginAdmin();
+
+                }
+
+            }
+        );
+
+    $("#closePanel")
+        ?.addEventListener(
+            "click",
+            closeAdminPanel
+        );
+
+    $("#logoutAdmin")
+        ?.addEventListener(
+            "click",
+            closeAdminPanel
+        );
+
+    $("#adminImages")
+        ?.addEventListener(
+            "change",
+            event => {
+
+                adminFiles =
+                    [...event.target.files]
+                        .filter(
+                            file =>
+                                file.type.startsWith(
+                                    "image/"
+                                )
+                        )
+                        .filter(
+                            file =>
+                                file.size <=
+                                5 * 1024 * 1024
+                        );
+
+                previewAdminImages();
+
+            }
+        );
+
+    $("#uploadGallery")
+        ?.addEventListener(
+            "click",
+            uploadGalleryImages
+        );
+
 }
 
-if (clearCartButton) {
-    clearCartButton.addEventListener("click", clearCart);
-}
 
-// ==========================================
-// PERSONALIZAR
-// ==========================================
+/* =========================================================
+   LOGIN
+========================================================= */
 
-if (personalizeButton) {
-    personalizeButton.addEventListener("click", personalize);
-}
+function loginAdmin() {
 
-// ==========================================
-// WHATSAPP
-// ==========================================
+    const password =
+        $("#adminPassword")
+            ?.value || "";
 
-if (whatsappLink) {
-    whatsappLink.href = `https://wa.me/${WHATSAPP}`;
-    whatsappLink.target = "_blank";
-}
+    const error =
+        $("#adminError");
 
-// ==========================================
-// ADMIN
-// ==========================================
+    if (
+        password ===
+        ADMIN_PASSWORD
+    ) {
 
-if (adminButton) {
-    adminButton.addEventListener("click", openAdminModal);
-}
+        $("#adminModal")
+            ?.classList.remove(
+                "show"
+            );
 
-if (closeAdmin) {
-    closeAdmin.addEventListener("click", closeAdminModal);
-}
+        $("#adminPanel")
+            ?.classList.add(
+                "show"
+            );
 
-if (loginAdmin) {
-    loginAdmin.addEventListener("click", adminLogin);
-}
+        if (error)
+            error.textContent = "";
 
-if (closePanel) {
-    closePanel.addEventListener("click", closeAdminPanel);
-}
+    } else {
 
-if (logoutAdmin) {
-    logoutAdmin.addEventListener("click", logoutAdminPanel);
-}
+        if (error) {
 
-if (adminImages) {
-    adminImages.addEventListener("change", previewAdminImages);
-}
+            error.textContent =
+                "❌ Contraseña incorrecta.";
 
-// ==========================================
-// ENTER EN CONTRASEÑA
-// ==========================================
-
-if (adminPassword) {
-    adminPassword.addEventListener("keydown", event => {
-        if (event.key === "Enter") {
-            adminLogin();
         }
-    });
+
+    }
+
 }
 
-// ==========================================
-// ESC PARA CERRAR
-// ==========================================
 
-document.addEventListener("keydown", event => {
-    if (event.key !== "Escape") return;
+/* =========================================================
+   CERRAR ADMIN
+========================================================= */
 
-    closeCart();
-    closeAdminModal();
-    closeAdminPanel();
-});
+function closeAdminPanel() {
 
-// ==========================================
-// CLIC FUERA DE MODALES
-// ==========================================
+    $("#adminPanel")
+        ?.classList.remove(
+            "show"
+        );
 
-if (adminModal) {
-    adminModal.addEventListener("click", event => {
-        if (event.target === adminModal) {
-            closeAdminModal();
+    adminFiles = [];
+
+    const preview =
+        $("#adminPreview");
+
+    if (preview)
+        preview.innerHTML = "";
+
+    const input =
+        $("#adminImages");
+
+    if (input)
+        input.value = "";
+
+}
+
+
+/* =========================================================
+   PREVISUALIZAR FOTOS
+========================================================= */
+
+function previewAdminImages() {
+
+    const preview =
+        $("#adminPreview");
+
+    if (!preview) return;
+
+    preview.innerHTML = "";
+
+    adminFiles.forEach(file => {
+
+        const url =
+            URL.createObjectURL(file);
+
+        const box =
+            document.createElement("div");
+
+        box.className =
+            "preview-item";
+
+        const img =
+            document.createElement("img");
+
+        img.src = url;
+
+        img.alt =
+            "Vista previa";
+
+        box.appendChild(img);
+
+        preview.appendChild(box);
+
+    });
+
+}
+
+
+/* =========================================================
+   SUBIR FOTOS
+========================================================= */
+
+async function uploadGalleryImages() {
+
+    const message =
+        $("#uploadMessage");
+
+    if (!adminFiles.length) {
+
+        if (message)
+            message.textContent =
+                "📸 Selecciona una o varias fotos.";
+
+        return;
+
+    }
+
+    if (!firebaseReady) {
+
+        if (message)
+            message.textContent =
+                "❌ Firebase no está conectado.";
+
+        return;
+
+    }
+
+    try {
+
+        if (!reviewsAuth.currentUser) {
+
+            await reviewsAuth
+                .signInAnonymously();
+
         }
-    });
+
+        message.textContent =
+            "🚀 Subiendo fotos...";
+
+        const total =
+            adminFiles.length;
+
+        let uploaded = 0;
+
+        for (const file of adminFiles) {
+
+            const safeName =
+                file.name.replace(
+                    /[^\w.\-]+/g,
+                    "_"
+                );
+
+            const filePath =
+                `gallery/${Date.now()}_${Math.random()
+                    .toString(36)
+                    .substring(2, 8)}_${safeName}`;
+
+            const storageRef =
+                galleryStorage.ref(filePath);
+
+            const uploadTask =
+                storageRef.put(file);
+
+            await new Promise(
+                (resolve, reject) => {
+
+                    uploadTask.on(
+
+                        "state_changed",
+
+                        snapshot => {
+
+                            const current =
+                                (
+                                    snapshot.bytesTransferred /
+                                    snapshot.totalBytes
+                                ) * 100;
+
+                            const totalProgress =
+                                (
+                                    (
+                                        uploaded +
+                                        current / 100
+                                    ) /
+                                    total
+                                ) * 100;
+
+                            updateProgress(
+                                totalProgress
+                            );
+
+                        },
+
+                        error => {
+
+                            reject(error);
+
+                        },
+
+                        async () => {
+
+                            try {
+
+                                const url =
+                                    await uploadTask
+                                        .snapshot
+                                        .ref
+                                        .getDownloadURL();
+
+                                await reviewsDB
+                                    .ref("gallery")
+                                    .push({
+
+                                        url:
+                                            url,
+
+                                        name:
+                                            file.name,
+
+                                        createdAt:
+                                            Date.now()
+
+                                    });
+
+                                uploaded++;
+
+                                resolve();
+
+                            } catch (error) {
+
+                                reject(error);
+
+                            }
+
+                        }
+
+                    );
+
+                }
+            );
+
+        }
+
+        updateProgress(100);
+
+        message.textContent =
+            "💜 ¡Fotos publicadas correctamente!";
+
+        toast(
+            "📸 ¡Fotos subidas a la galería!"
+        );
+
+        adminFiles = [];
+
+        if ($("#adminImages"))
+            $("#adminImages").value = "";
+
+        if ($("#adminPreview"))
+            $("#adminPreview").innerHTML = "";
+
+        setTimeout(() => {
+
+            closeAdminPanel();
+
+        }, 1500);
+
+    } catch (error) {
+
+        console.error(
+            "Error subiendo:",
+            error
+        );
+
+        if (message) {
+
+            message.textContent =
+                "❌ Error al subir. Revisa Firebase Storage.";
+
+        }
+
+    }
+
 }
 
-// ==========================================
-// INICIALIZAR
-// ==========================================
 
-renderProducts();
-renderCombos();
-renderBouquets();
-renderGallery();
-renderCart();
+/* =========================================================
+   PROGRESO
+========================================================= */
 
-console.log("Kookie Pop cargado correctamente 💜✨");
+function updateProgress(percent) {
+
+    const bar =
+        $(".upload-progress-bar");
+
+    const text =
+        $("#uploadProgressText");
+
+    if (bar) {
+
+        bar.style.width =
+            `${percent}%`;
+
+    }
+
+    if (text) {
+
+        text.textContent =
+            `${Math.round(percent)}%`;
+
+    }
+
+}
+
+
+/* =========================================================
+   PERSONALIZACIÓN
+========================================================= */
+
+function setupPersonalization() {
+
+    $("#personalizeButton")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                sendWhatsApp(
+                    "Hola Kookie Pop 💜 Quiero personalizar un pedido."
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function setupWhatsApp() {
+
+    const link =
+        $("#whatsappLink");
+
+    if (!link) return;
+
+    link.href =
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+            "Hola Kookie Pop 💜 Quiero hacer un pedido."
+        )}`;
+
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+function setupEvents() {
+
+    $("#openCart")
+        ?.addEventListener(
+            "click",
+            openCart
+        );
+
+    $("#closeCart")
+        ?.addEventListener(
+            "click",
+            closeCart
+        );
+
+    $("#cartOverlay")
+        ?.addEventListener(
+            "click",
+            closeCart
+        );
+
+    $("#sendOrder")
+        ?.addEventListener(
+            "click",
+            sendOrder
+        );
+
+    $("#clearCart")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                cart = [];
+
+                saveCart();
+
+                renderCart();
+
+                toast(
+                    "🛒 Carrito vaciado"
+                );
+
+            }
+        );
+
+    $("#publishReview")
+        ?.addEventListener(
+            "click",
+            publishReview
+        );
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeCart();
+
+                $("#adminModal")
+                    ?.classList.remove(
+                        "show"
+                    );
+
+                $("#adminPanel")
+                    ?.classList.remove(
+                        "show"
+                    );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        renderCatalog();
+
+        renderCart();
+
+        setupEvents();
+
+        setupReviewStars();
+
+        setupAdmin();
+
+        setupPersonalization();
+
+        setupWhatsApp();
+
+        loadReviews();
+
+        loadGallery();
+
+        console.log(
+            "💜 KOOKIE POP funcionando"
+        );
+
+    }
+);
