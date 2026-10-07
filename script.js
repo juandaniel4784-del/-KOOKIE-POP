@@ -15,6 +15,7 @@ const ADMIN_PASSWORD = "KookiePop2026";
 const firebaseConfig = {
     apiKey: "AIzaSyD9FP1B4c9NlHdINhf-Vb0oMvdaua32zSM",
     authDomain: "kookiepop-ccfb9.firebaseapp.com",
+    databaseURL: "https://kookiepop-ccfb9-default-rtdb.firebaseio.com",
     projectId: "kookiepop-ccfb9",
     storageBucket: "kookiepop-ccfb9.firebasestorage.app",
     messagingSenderId: "397148978428",
@@ -23,10 +24,7 @@ const firebaseConfig = {
 };
 
 
-/*
-    Firebase NO debe impedir que el resto de la página
-    funcione.
-*/
+/* ================= CONEXIÓN FIREBASE ================= */
 
 let db = null;
 let auth = null;
@@ -34,30 +32,58 @@ let storage = null;
 
 try {
 
-    if (typeof firebase !== "undefined") {
+    if (typeof firebase === "undefined") {
 
-        firebase.initializeApp(firebaseConfig);
-
-        db = firebase.database();
-
-        auth = firebase.auth();
-
-        storage = firebase.storage();
-
-        auth.signInAnonymously()
-            .catch(error => {
-                console.error(
-                    "Firebase Auth:",
-                    error
-                );
-            });
+        throw new Error(
+            "Firebase no está cargado en el HTML."
+        );
 
     }
+
+
+    if (!firebase.apps.length) {
+
+        firebase.initializeApp(
+            firebaseConfig
+        );
+
+    }
+
+
+    db = firebase.database();
+
+    auth = firebase.auth();
+
+    storage = firebase.storage();
+
+
+    auth.signInAnonymously()
+        .then(() => {
+
+            console.log(
+                "✅ Firebase Auth conectado"
+            );
+
+            console.log(
+                "👤 Usuario:",
+                auth.currentUser.uid
+            );
+
+        })
+        .catch(error => {
+
+            console.error(
+                "❌ Error de autenticación Firebase:",
+                error
+            );
+
+        });
+
 
 } catch (error) {
 
     console.error(
-        "Firebase no pudo iniciarse:",
+        "❌ Firebase no pudo iniciarse:",
         error
     );
 
@@ -644,6 +670,7 @@ function renderCart() {
                 </div>
 
             </div>
+
         `;
 
     });
@@ -788,7 +815,9 @@ function customBouquet() {
 }
 
 
-/* ================= RESEÑAS ================= */
+/* =====================================================
+   RESEÑAS PÚBLICAS
+===================================================== */
 
 let selectedRating = 0;
 
@@ -811,171 +840,232 @@ const reviewsContainer =
     document.getElementById("reviewsContainer");
 
 
-/* ESTRELLAS */
+/* ================= ESTRELLAS ================= */
 
-reviewStars
-    .querySelectorAll("button")
-    .forEach(button => {
+if (reviewStars) {
 
-        button.addEventListener(
-            "click",
-            () => {
+    reviewStars
+        .querySelectorAll("button")
+        .forEach(button => {
 
-                selectedRating =
-                    Number(button.dataset.rating);
+            button.addEventListener(
+                "click",
+                () => {
+
+                    selectedRating =
+                        Number(
+                            button.dataset.rating
+                        );
+
+                    reviewStars
+                        .querySelectorAll("button")
+                        .forEach(star => {
+
+                            star.classList.toggle(
+                                "active",
+                                Number(
+                                    star.dataset.rating
+                                ) <= selectedRating
+                            );
+
+                        });
+
+                }
+            );
+
+        });
+
+}
+
+
+/* ================= PUBLICAR RESEÑA ================= */
+
+if (publishReview) {
+
+    publishReview.addEventListener(
+        "click",
+        async () => {
+
+            const name =
+                reviewName.value.trim();
+
+            const text =
+                reviewText.value.trim();
+
+
+            if (!name) {
+
+                reviewMessage.textContent =
+                    "⚠️ Escribe tu nombre.";
+
+                return;
+
+            }
+
+
+            if (!selectedRating) {
+
+                reviewMessage.textContent =
+                    "⚠️ Selecciona una calificación.";
+
+                return;
+
+            }
+
+
+            if (!text) {
+
+                reviewMessage.textContent =
+                    "⚠️ Escribe tu reseña.";
+
+                return;
+
+            }
+
+
+            if (!db || !auth) {
+
+                reviewMessage.textContent =
+                    "❌ Firebase no está conectado.";
+
+                return;
+
+            }
+
+
+            publishReview.disabled = true;
+
+            publishReview.textContent =
+                "⏳ Publicando...";
+
+
+            try {
+
+                /*
+                    Esperar a que Firebase autentique
+                    al usuario antes de escribir.
+                */
+
+                if (!auth.currentUser) {
+
+                    await auth.signInAnonymously();
+
+                }
+
+
+                /*
+                    Comprobar nuevamente.
+                */
+
+                if (!auth.currentUser) {
+
+                    throw new Error(
+                        "No se pudo autenticar el usuario."
+                    );
+
+                }
+
+
+                const reviewData = {
+
+                    name: String(name),
+
+                    rating: Number(
+                        selectedRating
+                    ),
+
+                    text: String(text),
+
+                    createdAt:
+                        Date.now()
+
+                };
+
+
+                console.log(
+                    "📤 Enviando reseña:",
+                    reviewData
+                );
+
+
+                await db
+                    .ref("reviews")
+                    .push(reviewData);
+
+
+                console.log(
+                    "✅ Reseña enviada correctamente"
+                );
+
+
+                reviewName.value = "";
+
+                reviewText.value = "";
+
+                selectedRating = 0;
+
 
                 reviewStars
                     .querySelectorAll("button")
                     .forEach(star => {
 
-                        star.classList.toggle(
-                            "active",
-                            Number(
-                                star.dataset.rating
-                            ) <= selectedRating
+                        star.classList.remove(
+                            "active"
                         );
 
                     });
 
+
+                reviewMessage.textContent =
+                    "💜 ¡Reseña publicada correctamente!";
+
+
+                showToast(
+                    "⭐ Reseña publicada"
+                );
+
+
             }
-        );
 
-    });
+            catch(error) {
 
-
-/* PUBLICAR RESEÑA */
-
-publishReview.addEventListener(
-    "click",
-    async () => {
-
-        const name =
-            reviewName.value.trim();
-
-        const text =
-            reviewText.value.trim();
+                console.error(
+                    "❌ ERROR REAL DE FIREBASE:",
+                    error
+                );
 
 
-        if (!name) {
-
-            reviewMessage.textContent =
-                "⚠️ Escribe tu nombre.";
-
-            return;
-
-        }
-
-
-        if (!selectedRating) {
-
-            reviewMessage.textContent =
-                "⚠️ Selecciona una calificación.";
-
-            return;
-
-        }
-
-
-        if (!text) {
-
-            reviewMessage.textContent =
-                "⚠️ Escribe tu reseña.";
-
-            return;
-
-        }
-
-
-        if (!db || !auth) {
-
-            reviewMessage.textContent =
-                "❌ Firebase no está conectado.";
-
-            return;
-
-        }
-
-
-        publishReview.disabled = true;
-
-        publishReview.textContent =
-            "Publicando...";
-
-
-        try {
-
-            if (!auth.currentUser) {
-
-                await auth.signInAnonymously();
+                reviewMessage.textContent =
+                    "❌ Error Firebase: " +
+                    (
+                        error.message ||
+                        "No se pudo publicar la reseña."
+                    );
 
             }
 
 
-            await db
-                .ref("reviews")
-                .push({
+            publishReview.disabled = false;
 
-                    name: name,
-
-                    rating: selectedRating,
-
-                    text: text,
-
-                    createdAt: Date.now()
-
-                });
-
-
-            reviewName.value = "";
-
-            reviewText.value = "";
-
-            selectedRating = 0;
-
-
-            reviewStars
-                .querySelectorAll("button")
-                .forEach(star => {
-
-                    star.classList.remove("active");
-
-                });
-
-
-            reviewMessage.textContent =
-                "💜 ¡Reseña publicada correctamente!";
-
-            showToast("⭐ Reseña publicada");
+            publishReview.textContent =
+                "⭐ Publicar reseña";
 
         }
+    );
 
-        catch(error) {
-
-            console.error(error);
-
-            reviewMessage.textContent =
-                "❌ Firebase rechazó la reseña.";
-
-        }
+}
 
 
-        publishReview.disabled = false;
+/* ================= LEER RESEÑAS ================= */
 
-        publishReview.textContent =
-            "⭐ Publicar reseña";
-
-    }
-);
-
-
-/* LEER RESEÑAS */
-
-if (db) {
+if (db && reviewsContainer) {
 
     db.ref("reviews")
         .orderByChild("createdAt")
         .on(
+
             "value",
+
             snapshot => {
 
                 reviewsContainer.innerHTML = "";
@@ -986,8 +1076,11 @@ if (db) {
                 snapshot.forEach(child => {
 
                     reviews.push({
+
                         id: child.key,
+
                         ...child.val()
+
                     });
 
                 });
@@ -999,9 +1092,14 @@ if (db) {
                 if (!reviews.length) {
 
                     reviewsContainer.innerHTML = `
+
                         <div class="empty-gallery">
-                            ✨ Todavía no hay reseñas públicas.
+
+                            ✨ Todavía no hay
+                            reseñas públicas.
+
                         </div>
+
                     `;
 
                     return;
@@ -1012,74 +1110,139 @@ if (db) {
                 reviews.forEach(review => {
 
                     const card =
-                        document.createElement("article");
+                        document.createElement(
+                            "article"
+                        );
+
 
                     card.className =
                         "public-review";
 
 
                     const rating =
-                        Number(review.rating) || 0;
+                        Math.max(
+                            0,
+                            Math.min(
+                                5,
+                                Number(
+                                    review.rating
+                                ) || 0
+                            )
+                        );
 
 
                     const stars =
                         "★".repeat(rating) +
-                        "☆".repeat(5-rating);
+                        "☆".repeat(
+                            5 - rating
+                        );
 
 
                     const date =
                         review.createdAt
+
                             ? new Date(
                                 review.createdAt
-                              ).toLocaleDateString(
+                            ).toLocaleDateString(
                                 "es-CO"
-                              )
+                            )
+
                             : "";
 
 
                     card.innerHTML = `
 
                         <div class="stars">
+
                             ${stars}
+
                         </div>
 
+
                         <p>
-                            "${escapeHTML(review.text)}"
+
+                            "${escapeHTML(
+                                review.text
+                            )}"
+
                         </p>
 
+
                         <strong>
-                            — ${escapeHTML(review.name)} 💜
+
+                            —
+                            ${escapeHTML(
+                                review.name
+                            )}
+                            💜
+
                         </strong>
+
 
                         <br>
 
+
                         <small>
+
                             ${date}
+
                         </small>
 
                     `;
 
 
-                    reviewsContainer.appendChild(card);
+                    reviewsContainer.appendChild(
+                        card
+                    );
 
                 });
 
+            },
+
+            error => {
+
+                console.error(
+                    "❌ Error leyendo reseñas:",
+                    error
+                );
+
             }
+
         );
 
 }
 
 
-/* PROTECCIÓN */
+/* ================= PROTECCIÓN HTML ================= */
 
 function escapeHTML(value) {
 
     return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -1087,15 +1250,19 @@ function escapeHTML(value) {
 /* ================= GALERÍA ================= */
 
 const galleryGrid =
-    document.getElementById("galleryGrid");
+    document.getElementById(
+        "galleryGrid"
+    );
 
 
-if (db) {
+if (db && galleryGrid) {
 
     db.ref("gallery")
         .orderByChild("createdAt")
         .on(
+
             "value",
+
             snapshot => {
 
                 galleryGrid.innerHTML = "";
@@ -1109,14 +1276,20 @@ if (db) {
                         child.val();
 
 
-                    if (!data.url) return;
+                    if (!data.url) {
+
+                        return;
+
+                    }
 
 
                     found = true;
 
 
                     const img =
-                        document.createElement("img");
+                        document.createElement(
+                            "img"
+                        );
 
 
                     img.src =
@@ -1127,7 +1300,13 @@ if (db) {
                         "Kookie Pop";
 
 
-                    galleryGrid.appendChild(img);
+                    img.loading =
+                        "lazy";
+
+
+                    galleryGrid.appendChild(
+                        img
+                    );
 
                 });
 
@@ -1135,14 +1314,29 @@ if (db) {
                 if (!found) {
 
                     galleryGrid.innerHTML = `
+
                         <div class="empty-gallery">
-                            ✨ Todavía no hay fotos en la galería.
+
+                            ✨ Todavía no hay
+                            fotos en la galería.
+
                         </div>
+
                     `;
 
                 }
 
+            },
+
+            error => {
+
+                console.error(
+                    "❌ Error leyendo galería:",
+                    error
+                );
+
             }
+
         );
 
 }
@@ -1151,60 +1345,106 @@ if (db) {
 /* ================= ADMIN ================= */
 
 const adminModal =
-    document.getElementById("adminModal");
+    document.getElementById(
+        "adminModal"
+    );
 
 const adminPanel =
-    document.getElementById("adminPanel");
+    document.getElementById(
+        "adminPanel"
+    );
 
 const adminPassword =
-    document.getElementById("adminPassword");
+    document.getElementById(
+        "adminPassword"
+    );
 
 const adminError =
-    document.getElementById("adminError");
+    document.getElementById(
+        "adminError"
+    );
 
 
-document
-    .getElementById("adminButton")
-    .addEventListener(
+const adminButton =
+    document.getElementById(
+        "adminButton"
+    );
+
+
+if (adminButton) {
+
+    adminButton.addEventListener(
         "click",
         () => {
 
-            adminModal.classList.add("show");
+            adminModal.classList.add(
+                "show"
+            );
 
         }
     );
 
+}
 
-document
-    .getElementById("closeAdmin")
-    .addEventListener(
+
+const closeAdmin =
+    document.getElementById(
+        "closeAdmin"
+    );
+
+
+if (closeAdmin) {
+
+    closeAdmin.addEventListener(
         "click",
         () => {
 
-            adminModal.classList.remove("show");
+            adminModal.classList.remove(
+                "show"
+            );
 
         }
     );
 
+}
 
-document
-    .getElementById("closePanel")
-    .addEventListener(
+
+const closePanel =
+    document.getElementById(
+        "closePanel"
+    );
+
+
+if (closePanel) {
+
+    closePanel.addEventListener(
         "click",
         () => {
 
-            adminPanel.classList.remove("show");
+            adminPanel.classList.remove(
+                "show"
+            );
 
         }
     );
 
+}
 
-document
-    .getElementById("loginAdmin")
-    .addEventListener(
+
+const loginAdminButton =
+    document.getElementById(
+        "loginAdmin"
+    );
+
+
+if (loginAdminButton) {
+
+    loginAdminButton.addEventListener(
         "click",
         loginAdmin
     );
+
+}
 
 
 function loginAdmin() {
@@ -1214,13 +1454,19 @@ function loginAdmin() {
         ADMIN_PASSWORD
     ) {
 
-        adminModal.classList.remove("show");
+        adminModal.classList.remove(
+            "show"
+        );
 
-        adminPanel.classList.add("show");
+        adminPanel.classList.add(
+            "show"
+        );
 
         adminError.textContent = "";
 
-    } else {
+    }
+
+    else {
 
         adminError.textContent =
             "❌ Contraseña incorrecta.";
@@ -1233,316 +1479,485 @@ function loginAdmin() {
 /* ================= PREVISUALIZAR FOTOS ================= */
 
 const adminImages =
-    document.getElementById("adminImages");
+    document.getElementById(
+        "adminImages"
+    );
 
 const adminPreview =
-    document.getElementById("adminPreview");
+    document.getElementById(
+        "adminPreview"
+    );
 
 
-adminImages.addEventListener(
-    "change",
-    () => {
+if (adminImages && adminPreview) {
 
-        adminPreview.innerHTML = "";
+    adminImages.addEventListener(
+        "change",
+        () => {
 
-
-        Array
-            .from(adminImages.files)
-            .forEach(file => {
-
-                const reader =
-                    new FileReader();
+            adminPreview.innerHTML = "";
 
 
-                reader.onload =
-                    event => {
+            Array
+                .from(
+                    adminImages.files
+                )
+                .forEach(file => {
 
-                        adminPreview.innerHTML += `
-
-                            <img
-                                src="${event.target.result}"
-                                alt="Vista previa"
-                            >
-
-                        `;
-
-                    };
+                    const reader =
+                        new FileReader();
 
 
-                reader.readAsDataURL(file);
+                    reader.onload =
+                        event => {
 
-            });
+                            adminPreview.innerHTML += `
 
-    }
-);
+                                <img
+                                    src="${event.target.result}"
+                                    alt="Vista previa"
+                                >
+
+                            `;
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                });
+
+        }
+    );
+
+}
 
 
 /* ================= SUBIR FOTOS ================= */
 
 const uploadGallery =
-    document.getElementById("uploadGallery");
+    document.getElementById(
+        "uploadGallery"
+    );
 
 const progressBar =
-    document.querySelector(".progress-bar");
+    document.querySelector(
+        ".progress-bar"
+    );
 
 const progressText =
-    document.getElementById("uploadProgressText");
+    document.getElementById(
+        "uploadProgressText"
+    );
 
 
-uploadGallery.addEventListener(
-    "click",
-    async () => {
+if (
+    uploadGallery &&
+    adminImages
+) {
 
-        const files =
-            Array.from(
-                adminImages.files
-            );
+    uploadGallery.addEventListener(
+        "click",
+        async () => {
 
-
-        if (!files.length) {
-
-            showToast(
-                "📸 Selecciona alguna foto."
-            );
-
-            return;
-
-        }
-
-
-        if (!storage || !db || !auth) {
-
-            progressText.textContent =
-                "❌ Firebase no está disponible.";
-
-            return;
-
-        }
-
-
-        uploadGallery.disabled = true;
-
-
-        try {
-
-            if (!auth.currentUser) {
-
-                await auth.signInAnonymously();
-
-            }
-
-
-            let count = 0;
-
-
-            for (const file of files) {
-
-                if (
-                    !file.type.startsWith("image/")
-                ) {
-
-                    continue;
-
-                }
-
-
-                if (
-                    file.size >
-                    5 * 1024 * 1024
-                ) {
-
-                    continue;
-
-                }
-
-
-                const safeName =
-                    file.name.replace(
-                        /[^a-zA-Z0-9._-]/g,
-                        "_"
-                    );
-
-
-                const path =
-                    "gallery/" +
-                    Date.now() +
-                    "_" +
-                    safeName;
-
-
-                const ref =
-                    storage.ref(path);
-
-
-                const task =
-                    ref.put(file);
-
-
-                await new Promise(
-                    (resolve,reject) => {
-
-                        task.on(
-                            "state_changed",
-
-                            snapshot => {
-
-                                const percent =
-                                    Math.round(
-                                        (
-                                            snapshot.bytesTransferred /
-                                            snapshot.totalBytes
-                                        ) * 100
-                                    );
-
-
-                                progressBar.style.width =
-                                    percent + "%";
-
-
-                                progressText.textContent =
-                                    `Subiendo ${count + 1} de ${files.length}: ${percent}%`;
-
-                            },
-
-                            reject,
-
-                            async () => {
-
-                                const url =
-                                    await task
-                                        .snapshot
-                                        .ref
-                                        .getDownloadURL();
-
-
-                                await db
-                                    .ref("gallery")
-                                    .push({
-
-                                        url: url,
-
-                                        name: file.name,
-
-                                        createdAt:
-                                            Date.now()
-
-                                    });
-
-
-                                resolve();
-
-                            }
-                        );
-
-                    }
+            const files =
+                Array.from(
+                    adminImages.files
                 );
 
 
-                count++;
+            if (!files.length) {
+
+                showToast(
+                    "📸 Selecciona alguna foto."
+                );
+
+                return;
 
             }
 
 
-            progressBar.style.width =
-                "100%";
+            if (
+                !storage ||
+                !db ||
+                !auth
+            ) {
+
+                progressText.textContent =
+                    "❌ Firebase no está disponible.";
+
+                return;
+
+            }
 
 
-            progressText.textContent =
-                `✨ ${count} foto(s) publicadas.`;
+            uploadGallery.disabled =
+                true;
 
 
-            adminImages.value = "";
+            try {
 
-            adminPreview.innerHTML = "";
+                if (!auth.currentUser) {
+
+                    await auth.signInAnonymously();
+
+                }
 
 
-            showToast(
-                "📸 Galería actualizada"
-            );
+                let count = 0;
+
+
+                for (
+                    const file of files
+                ) {
+
+                    if (
+                        !file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    if (
+                        file.size >
+                        5 * 1024 * 1024
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    const safeName =
+                        file.name.replace(
+                            /[^a-zA-Z0-9._-]/g,
+                            "_"
+                        );
+
+
+                    const path =
+                        "gallery/" +
+                        Date.now() +
+                        "_" +
+                        safeName;
+
+
+                    const ref =
+                        storage.ref(
+                            path
+                        );
+
+
+                    const task =
+                        ref.put(file);
+
+
+                    await new Promise(
+                        (
+                            resolve,
+                            reject
+                        ) => {
+
+                            task.on(
+
+                                "state_changed",
+
+                                snapshot => {
+
+                                    const percent =
+                                        Math.round(
+
+                                            (
+                                                snapshot.bytesTransferred /
+                                                snapshot.totalBytes
+
+                                            ) * 100
+
+                                        );
+
+
+                                    if (
+                                        progressBar
+                                    ) {
+
+                                        progressBar.style.width =
+                                            percent +
+                                            "%";
+
+                                    }
+
+
+                                    if (
+                                        progressText
+                                    ) {
+
+                                        progressText.textContent =
+                                            `Subiendo ${
+                                                count + 1
+                                            } de ${
+                                                files.length
+                                            }: ${
+                                                percent
+                                            }%`;
+
+                                    }
+
+                                },
+
+                                error => {
+
+                                    reject(
+                                        error
+                                    );
+
+                                },
+
+                                async () => {
+
+                                    try {
+
+                                        const url =
+                                            await task
+                                                .snapshot
+                                                .ref
+                                                .getDownloadURL();
+
+
+                                        await db
+                                            .ref(
+                                                "gallery"
+                                            )
+                                            .push({
+
+                                                url:
+                                                    url,
+
+                                                name:
+                                                    file.name,
+
+                                                createdAt:
+                                                    Date.now()
+
+                                            });
+
+
+                                        resolve();
+
+                                    }
+
+                                    catch(error) {
+
+                                        reject(
+                                            error
+                                        );
+
+                                    }
+
+                                }
+
+                            );
+
+                        }
+
+                    );
+
+
+                    count++;
+
+                }
+
+
+                if (progressBar) {
+
+                    progressBar.style.width =
+                        "100%";
+
+                }
+
+
+                if (progressText) {
+
+                    progressText.textContent =
+                        `✨ ${count} foto(s) publicadas.`;
+
+                }
+
+
+                adminImages.value =
+                    "";
+
+                adminPreview.innerHTML =
+                    "";
+
+
+                showToast(
+                    "📸 Galería actualizada"
+                );
+
+            }
+
+            catch(error) {
+
+                console.error(
+                    "❌ ERROR GALERÍA:",
+                    error
+                );
+
+
+                if (progressText) {
+
+                    progressText.textContent =
+                        "❌ " +
+                        (
+                            error.message ||
+                            "Error al subir las fotos."
+                        );
+
+                }
+
+            }
+
+
+            uploadGallery.disabled =
+                false;
 
         }
+    );
 
-        catch(error) {
-
-            console.error(error);
-
-            progressText.textContent =
-                "❌ Error al subir las fotos.";
-
-        }
-
-
-        uploadGallery.disabled = false;
-
-    }
-);
+}
 
 
 /* ================= BOTONES ================= */
 
-document
-    .getElementById("openCart")
-    .addEventListener(
+const openCartButton =
+    document.getElementById(
+        "openCart"
+    );
+
+
+if (openCartButton) {
+
+    openCartButton.addEventListener(
         "click",
         openCart
     );
 
+}
 
-document
-    .getElementById("closeCart")
-    .addEventListener(
+
+const closeCartButton =
+    document.getElementById(
+        "closeCart"
+    );
+
+
+if (closeCartButton) {
+
+    closeCartButton.addEventListener(
         "click",
         closeCart
     );
 
-
-cartOverlay.addEventListener(
-    "click",
-    closeCart
-);
+}
 
 
-document
-    .getElementById("clearCart")
-    .addEventListener(
+if (cartOverlay) {
+
+    cartOverlay.addEventListener(
+        "click",
+        closeCart
+    );
+
+}
+
+
+const clearCartButton =
+    document.getElementById(
+        "clearCart"
+    );
+
+
+if (clearCartButton) {
+
+    clearCartButton.addEventListener(
         "click",
         clearCart
     );
 
+}
 
-document
-    .getElementById("sendOrder")
-    .addEventListener(
+
+const sendOrderButton =
+    document.getElementById(
+        "sendOrder"
+    );
+
+
+if (sendOrderButton) {
+
+    sendOrderButton.addEventListener(
         "click",
         sendOrder
     );
 
+}
 
-document
-    .getElementById("personalizeButton")
-    .addEventListener(
+
+const personalizeButton =
+    document.getElementById(
+        "personalizeButton"
+    );
+
+
+if (personalizeButton) {
+
+    personalizeButton.addEventListener(
         "click",
         personalize
     );
 
+}
 
-document
-    .getElementById("logoutAdmin")
-    .addEventListener(
+
+const logoutAdmin =
+    document.getElementById(
+        "logoutAdmin"
+    );
+
+
+if (logoutAdmin) {
+
+    logoutAdmin.addEventListener(
         "click",
         () => {
 
-            adminPanel.classList.remove("show");
+            adminPanel.classList.remove(
+                "show"
+            );
 
         }
     );
 
+}
+
 
 /* ================= WHATSAPP ================= */
 
-document
-    .getElementById("whatsappLink")
-    .href =
+const whatsappLink =
+    document.getElementById(
+        "whatsappLink"
+    );
+
+
+if (whatsappLink) {
+
+    whatsappLink.href =
         "https://wa.me/" +
         WHATSAPP +
         "?text=" +
@@ -1550,25 +1965,41 @@ document
             "Hola Kookie Pop 💜 quiero información sobre sus productos."
         );
 
+}
+
 
 /* ================= TOAST ================= */
 
 let toastTimer;
 
+
 function showToast(message) {
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
+
+
+    if (!toast) {
+
+        return;
+
+    }
 
 
     toast.textContent =
         message;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
-    clearTimeout(toastTimer);
+    clearTimeout(
+        toastTimer
+    );
 
 
     toastTimer =
