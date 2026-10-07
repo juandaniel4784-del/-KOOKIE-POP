@@ -3,488 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Kookie Pop | K-Pop Store</title>
-
-    <meta
-        name="description"
-        content="Kookie Pop - Photocards, accesorios, combos y ramos personalizados."
-    >
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =====================================================
-     FONDO ANIMADO
-===================================================== -->
-
-<div class="background-effects" aria-hidden="true">
-    <span>✦</span>
-    <span>♡</span>
-    <span>★</span>
-    <span>✧</span>
-    <span>♡</span>
-    <span>✦</span>
-    <span>★</span>
-    <span>✧</span>
-    <span>💜</span>
-    <span>✦</span>
+<div class="particles">
+    <span>✦</span><span>♡</span><span>★</span><span>✧</span>
+    <span>💜</span><span>✦</span><span>♡</span><span>★</span>
 </div>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header class="header">
+    <a href="#inicio" class="brand">
+        <img src="assets/logo.png" alt="Kookie Pop">
+        <span>Kookie Pop</span>
+    </a>
 
-    <div class="header-inner">
+    <nav class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#combos">Combos</a>
+        <a href="#flores">Ramos</a>
+        <a href="#galeria">Galería</a>
+        <a href="#resenas">Reseñas</a>
+    </nav>
 
-        <a href="#inicio" class="brand">
-
-            <div class="brand-logo">
-
-                <img
-                    src="assets/logo.png"
-                    alt="Logo Kookie Pop"
-                    onerror="this.style.display='none'"
-                >
-
-                <span class="logo-fallback">KP</span>
-
-            </div>
-
-            <div class="brand-text">
-                <strong>Kookie Pop</strong>
-                <small>K-Pop Store</small>
-            </div>
-
-        </a>
-
-
-        <nav class="nav" id="mainNav">
-
-            <a href="#inicio">Inicio</a>
-            <a href="#productos">Productos</a>
-            <a href="#combos">Combos</a>
-            <a href="#flores">Ramos</a>
-            <a href="#galeria">Galería</a>
-            <a href="#resenas">Reseñas</a>
-
-        </nav>
-
-
-        <button
-            id="openCart"
-            class="cart-button"
-            type="button"
-        >
-
-            🛍️
-
-            <span>Carrito</span>
-
-            <b id="cartCount">0</b>
-
-        </button>
-
-    </div>
-
+    <button id="openCart" class="cart-button">
+        🛒 <span>Carrito</span>
+        <b id="cartCount">0</b>
+    </button>
 </header>
 
 
-
-<!-- =====================================================
-     CONTENIDO PRINCIPAL
-===================================================== -->
-
-<main>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- ================= HERO ================= -->
 
 <section id="inicio" class="hero">
-
-    <div class="hero-glow"></div>
 
     <div class="hero-content">
 
         <div class="hero-badge">
-            ✦ BIENVENIDO A KOOKIE POP ✦
+            ✦ K-POP STORE ✦
         </div>
 
         <h1>
             Tu mundo K-Pop
-            <span>comienza aquí</span>
+            <span>comienza aquí 💜</span>
         </h1>
 
         <p>
-            Photocards, accesorios, combos, ramos y detalles
-            totalmente personalizados para ti.
+            Photocards, manillas, collares, flores eternas,
+            combos y mucho más. Todo personalizado para ti.
         </p>
 
-
         <div class="hero-buttons">
-
-            <a
-                href="#productos"
-                class="main-button"
-            >
-                ✨ Ver productos
+            <a href="#productos" class="btn-primary">
+                Ver productos ✨
             </a>
 
-            <a
-                href="#flores"
-                class="secondary-button"
-            >
-                💐 Ver ramos
+            <a href="#flores" class="btn-secondary">
+                Ver ramos 🌸
             </a>
-
-        </div>
-
-
-        <div class="hero-mini-info">
-
-            <div>
-                <strong>100%</strong>
-                <span>Personalizado</span>
-            </div>
-
-            <div>
-                <strong>💜</strong>
-                <span>Hecho con amor</span>
-            </div>
-
-            <div>
-                <strong>📦</strong>
-                <span>Pedidos fáciles</span>
-            </div>
-
         </div>
 
     </div>
 
-
     <div class="hero-logo">
-
-        <div class="logo-orbit orbit-one"></div>
-        <div class="logo-orbit orbit-two"></div>
-
-        <div class="hero-logo-circle">
-
-            <img
-                src="assets/logo.png"
-                alt="Kookie Pop"
-                onerror="this.style.display='none'"
-            >
-
-            <span class="hero-logo-fallback">
-                💜
-            </span>
-
-        </div>
-
-
-        <span class="floating-symbol symbol-one">♡</span>
-        <span class="floating-symbol symbol-two">✦</span>
-        <span class="floating-symbol symbol-three">★</span>
-        <span class="floating-symbol symbol-four">✧</span>
-
+        <div class="hero-glow"></div>
+        <img src="assets/logo.png" alt="Logo Kookie Pop">
     </div>
 
 </section>
 
 
-
-<!-- =====================================================
-     DIVISOR
-===================================================== -->
-
-<div class="section-divider">
-    <span></span>
-    <i>✦</i>
-    <span></span>
-</div>
-
-
-
-<!-- =====================================================
-     PRODUCTOS
-===================================================== -->
+<!-- ================= PRODUCTOS ================= -->
 
 <section id="productos" class="section">
 
-    <div class="section-heading">
-
-        <span class="section-label">
-            ✦ KOOKIE POP ✦
-        </span>
-
-        <h2>
-            Nuestros <span>productos</span>
-        </h2>
-
-        <p>
-            Productos personalizados para todos los amantes
-            del K-Pop.
-        </p>
-
+    <div class="section-title">
+        <span>✦ KOOKIE POP SHOP ✦</span>
+        <h2>Nuestros productos</h2>
+        <p>Elige tus favoritos y agrégalos al carrito.</p>
     </div>
 
-
-    <div
-        id="productsGrid"
-        class="products-grid"
-    ></div>
+    <div id="productsGrid" class="products-grid"></div>
 
 </section>
 
 
+<!-- ================= COMBOS ================= -->
 
-<!-- =====================================================
-     COMBOS
-===================================================== -->
+<section id="combos" class="section dark-section">
 
-<section
-    id="combos"
-    class="section alternate-section"
->
-
-    <div class="section-heading">
-
-        <span class="section-label">
-            💜 ESPECIALES
-        </span>
-
-        <h2>
-            Combos <span>K-Pop</span>
-        </h2>
-
-        <p>
-            Combos especiales para llevar tus favoritos juntos.
-        </p>
-
+    <div class="section-title">
+        <span>💜 ESPECIALES KOOKIE POP 💜</span>
+        <h2>Combos</h2>
+        <p>Arma tu colección con nuestros combos.</p>
     </div>
 
-
-    <div
-        id="combosGrid"
-        class="products-grid combo-grid"
-    ></div>
+    <div id="combosGrid" class="products-grid"></div>
 
 </section>
 
 
+<!-- ================= RAMOS ================= -->
 
-<!-- =====================================================
-     RAMOS
-===================================================== -->
+<section id="flores" class="section">
 
-<section
-    id="flores"
-    class="section"
->
-
-    <div class="section-heading">
-
-        <span class="section-label">
-            🌸 DETALLES ESPECIALES
-        </span>
-
-        <h2>
-            Ramos <span>personalizados</span>
-        </h2>
-
+    <div class="section-title">
+        <span>🌸 FLORES ETERNAS 🌸</span>
+        <h2>Ramos personalizados</h2>
         <p>
-            Diseña un ramo con tus photocards y flores favoritas.
+            Las photocards y el estilo de las flores
+            pueden ser totalmente personalizados.
         </p>
-
     </div>
-
 
     <div class="custom-notice">
-
-        <div class="notice-icon">
-            💐
-        </div>
-
-        <div>
-
-            <h3>
-                Tú decides el diseño
-            </h3>
-
-            <p>
-                Las photocards y el estilo de las flores
-                son totalmente personalizables.
-            </p>
-
-        </div>
-
+        💜 ¿Quieres algo diferente?
+        Podemos hacerlo personalizado para ti.
     </div>
 
-
-    <div
-        id="bouquetsGrid"
-        class="products-grid bouquet-grid"
-    ></div>
+    <div id="bouquetsGrid" class="products-grid"></div>
 
 </section>
 
 
+<!-- ================= PERSONALIZACIÓN ================= -->
 
-<!-- =====================================================
-     PERSONALIZACIÓN
-===================================================== -->
+<section class="personalize-section">
 
-<section
-    id="personaliza"
-    class="personalize-section"
->
-
-    <div class="personalize-decoration decoration-one">
-        ✦
-    </div>
-
-    <div class="personalize-decoration decoration-two">
-        ♡
-    </div>
-
-    <div class="personalize-content">
-
-        <span class="section-label">
-            ✨ CREA ALGO ÚNICO
-        </span>
+    <div>
+        <span>✦ HAZLO A TU MANERA ✦</span>
 
         <h2>
-            ¿Tienes una idea?
+            Diseña algo
+            <strong>único</strong>
         </h2>
 
         <p>
-            Cuéntanos qué quieres crear y te ayudamos
-            a convertirlo en un detalle K-Pop.
+            Cuéntanos qué grupo, artista, colores o estilo quieres
+            y hacemos tu pedido personalizado.
         </p>
 
-        <button
-            id="personalizeButton"
-            class="main-button"
-            type="button"
-        >
-            💜 Quiero personalizar
+        <button id="personalizeButton" class="big-action">
+            💬 Personalizar por WhatsApp
         </button>
+    </div>
 
+    <div class="personalize-logo">
+        <img src="assets/logo.png" alt="Kookie Pop">
     </div>
 
 </section>
 
 
+<!-- ================= GALERÍA ================= -->
 
-<!-- =====================================================
-     GALERÍA
-===================================================== -->
+<section id="galeria" class="section">
 
-<section
-    id="galeria"
-    class="section gallery-section"
->
-
-    <div class="section-heading">
-
-        <span class="section-label">
-            📸 KOOKIE POP
-        </span>
-
-        <h2>
-            Nuestra <span>galería</span>
-        </h2>
-
-        <p>
-            Aquí aparecerán las creaciones que publiques desde
-            el panel de administración.
-        </p>
-
+    <div class="section-title">
+        <span>📸 KOOKIE POP</span>
+        <h2>Nuestra galería</h2>
+        <p>Muy pronto encontrarás aquí nuestros diseños.</p>
     </div>
 
-
-    <!--
-        IMPORTANTE:
-
-        Las fotos NO necesitan estar dentro de assets.
-
-        El administrador podrá seleccionarlas directamente
-        desde su computador y subirlas desde esta página.
-
-        Firebase Storage guardará las imágenes.
-    -->
-
-    <div
-        id="galleryGrid"
-        class="gallery-grid"
-    ></div>
-
-
-    <div
-        id="galleryEmpty"
-        class="gallery-empty"
-    >
-
-        <div class="gallery-empty-icon">
-            📸
+    <div id="galleryGrid" class="gallery-grid">
+        <div class="gallery-empty">
+            ✨ Aquí aparecerán las fotos de Kookie Pop ✨
         </div>
-
-        <h3>
-            Aún no hay fotos
-        </h3>
-
-        <p>
-            Cuando publiques tus primeras creaciones,
-            aparecerán aquí.
-        </p>
-
     </div>
 
-
-    <button
-        id="adminButton"
-        class="admin-open-button"
-        type="button"
-    >
-        🔐 Administrar galería
-    </button>
+    <div class="admin-area">
+        <button id="adminButton" class="admin-button">
+            🔐 Soy administrador
+        </button>
+    </div>
 
 </section>
 
 
+<!-- ================= RESEÑAS ================= -->
 
-<!-- =====================================================
-     RESEÑAS
-===================================================== -->
+<section id="resenas" class="section reviews-section">
 
-<section
-    id="resenas"
-    class="section reviews-section"
->
-
-    <div class="section-heading">
-
-        <span class="section-label">
-            💌 COMUNIDAD
-        </span>
-
-        <h2>
-            Opiniones de <span>Kookie Pop</span>
-        </h2>
-
-        <p>
-            Comparte tu experiencia con nuestra comunidad.
-        </p>
-
+    <div class="section-title">
+        <span>💜 KOOKIE POP LOVERS 💜</span>
+        <h2>Lo que dicen nuestros clientes</h2>
+        <p>Comparte tu experiencia con nuestra comunidad.</p>
     </div>
-
 
 
     <!-- RESEÑAS FIJAS -->
@@ -492,343 +201,135 @@
     <div class="reviews-grid">
 
         <article class="review-card">
-
-            <div class="review-stars">
-                ★★★★★
-            </div>
-
+            <div class="stars">★★★★★</div>
             <p>
-                “Me encantó mi pedido. Las photocards quedaron
-                demasiado bonitas.”
+                "Me encantó mi pedido.
+                Las photocards quedaron demasiado bonitas."
             </p>
-
-            <strong>
-                Cliente Kookie Pop 💜
-            </strong>
-
+            <strong>— Cliente Kookie Pop 💜</strong>
         </article>
 
-
         <article class="review-card">
-
-            <div class="review-stars">
-                ★★★★★
-            </div>
-
+            <div class="stars">★★★★★</div>
             <p>
-                “Todo quedó exactamente como lo imaginaba.
-                Volvería a comprar.”
+                "Todo quedó exactamente como lo imaginaba.
+                Volvería a comprar."
             </p>
-
-            <strong>
-                K-Pop Lover 🐰
-            </strong>
-
+            <strong>— K-Pop Lover 🐰</strong>
         </article>
 
-
         <article class="review-card">
-
-            <div class="review-stars">
-                ★★★★★
-            </div>
-
+            <div class="stars">★★★★★</div>
             <p>
-                “El ramo quedó precioso. Las flores y las
-                photocards combinaron perfectamente.”
+                "El ramo quedó precioso.
+                Las flores y las photocards combinaron perfectamente."
             </p>
-
-            <strong>
-                Bestie 💗
-            </strong>
-
+            <strong>— Bestie 💗</strong>
         </article>
 
-
         <article class="review-card">
-
-            <div class="review-stars">
-                ★★★★★
-            </div>
-
+            <div class="stars">★★★★★</div>
             <p>
-                “Me encantó la personalización.
-                Todo se siente muy K-Pop.”
+                "Me encantó la personalización.
+                Todo se siente muy K-Pop."
             </p>
-
-            <strong>
-                Army 💙
-            </strong>
-
+            <strong>— Army 💙</strong>
         </article>
 
     </div>
 
 
+    <!-- FORMULARIO -->
 
-    <!-- =================================================
-         FORMULARIO DE RESEÑAS PÚBLICAS
-    ================================================== -->
+    <div class="review-form-box">
 
-    <div class="public-review-box">
+        <h3>✨ Deja tu propia reseña</h3>
 
-        <div class="review-form">
+        <input
+            id="reviewName"
+            type="text"
+            maxlength="30"
+            placeholder="Tu nombre">
 
-            <div class="form-icon">
-                💌
-            </div>
+        <div class="star-selector" id="reviewStars">
 
-            <h3>
-                Deja tu reseña
-            </h3>
-
-            <p class="form-description">
-                Tu opinión aparecerá públicamente en Kookie Pop.
-            </p>
-
-
-            <label for="reviewName">
-                Tu nombre
-            </label>
-
-            <input
-                id="reviewName"
-                type="text"
-                maxlength="30"
-                placeholder="Escribe tu nombre"
-                autocomplete="name"
-            >
-
-
-            <label>
-                Calificación
-            </label>
-
-
-            <div
-                id="reviewStars"
-                class="review-stars-selector"
-            >
-
-                <button
-                    type="button"
-                    data-rating="1"
-                >
-                    ★
-                </button>
-
-                <button
-                    type="button"
-                    data-rating="2"
-                >
-                    ★
-                </button>
-
-                <button
-                    type="button"
-                    data-rating="3"
-                >
-                    ★
-                </button>
-
-                <button
-                    type="button"
-                    data-rating="4"
-                >
-                    ★
-                </button>
-
-                <button
-                    type="button"
-                    data-rating="5"
-                >
-                    ★
-                </button>
-
-            </div>
-
-
-            <label for="reviewText">
-                Tu reseña
-            </label>
-
-            <textarea
-                id="reviewText"
-                maxlength="300"
-                rows="5"
-                placeholder="Escribe tu experiencia..."
-            ></textarea>
-
-
-            <button
-                id="publishReview"
-                class="publish-review"
-                type="button"
-            >
-                ⭐ Publicar reseña
-            </button>
-
-
-            <p
-                id="reviewMessage"
-                class="review-message"
-            ></p>
+            <button type="button" data-rating="1">★</button>
+            <button type="button" data-rating="2">★</button>
+            <button type="button" data-rating="3">★</button>
+            <button type="button" data-rating="4">★</button>
+            <button type="button" data-rating="5">★</button>
 
         </div>
 
-    </div>
+        <textarea
+            id="reviewText"
+            maxlength="300"
+            placeholder="Escribe tu reseña..."></textarea>
 
+        <button id="publishReview" class="publish-button">
+            ⭐ Publicar reseña
+        </button>
 
-
-    <!-- RESEÑAS QUE VIENEN DE FIREBASE -->
-
-    <div class="community-heading">
-
-        <span>✦</span>
-
-        <h3>
-            Reseñas de nuestra comunidad
-        </h3>
-
-        <span>✦</span>
+        <p id="reviewMessage"></p>
 
     </div>
 
 
-    <div
-        id="reviewsContainer"
-        class="reviews-container public-reviews"
-    ></div>
+    <h3 class="community-title">
+        ✨ Reseñas de nuestra comunidad ✨
+    </h3>
+
+    <div id="reviewsContainer" class="community-reviews"></div>
 
 </section>
 
 
-
-<!-- =====================================================
-     CONTACTO
-===================================================== -->
+<!-- ================= CONTACTO ================= -->
 
 <section class="contact-section">
 
-    <div class="contact-decoration decoration-left">
-        ✦
-    </div>
+    <h2>¿Listo para tu pedido? 💜</h2>
 
-    <div class="contact-decoration decoration-right">
-        ♡
-    </div>
+    <p>
+        Escríbenos y cuéntanos qué quieres.
+    </p>
 
-
-    <div class="contact-content">
-
-        <span class="section-label">
-            💜 HAZ TU PEDIDO
-        </span>
-
-        <h2>
-            ¿Listo para pedir?
-        </h2>
-
-        <p>
-            Escríbenos directamente por WhatsApp.
-        </p>
-
-
-        <a
-            id="whatsappLink"
-            class="whatsapp-button"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            💬 Pedir por WhatsApp
-        </a>
-
-    </div>
+    <a id="whatsappLink" class="whatsapp-button">
+        💬 Escríbenos por WhatsApp
+    </a>
 
 </section>
 
-</main>
 
+<!-- ================= CARRITO ================= -->
 
+<div id="cartOverlay" class="cart-overlay"></div>
 
-<!-- =====================================================
-     CARRITO
-===================================================== -->
-
-<div
-    id="cartOverlay"
-    class="cart-overlay"
-></div>
-
-
-<aside
-    id="cartDrawer"
-    class="cart-drawer"
->
+<aside id="cartDrawer" class="cart-drawer">
 
     <div class="cart-header">
+        <h2>🛒 Mi carrito</h2>
 
-        <div>
-
-            <span class="cart-title-icon">
-                🛍️
-            </span>
-
-            <h2>
-                Tu carrito
-            </h2>
-
-        </div>
-
-
-        <button
-            id="closeCart"
-            class="close-button"
-            type="button"
-        >
+        <button id="closeCart" class="close-button">
             ×
         </button>
-
     </div>
 
-
-    <div
-        id="cartItems"
-        class="cart-items"
-    ></div>
-
+    <div id="cartItems" class="cart-items"></div>
 
     <div class="cart-footer">
 
-        <div class="cart-total-row">
-
-            <span>
-                Total
-            </span>
-
-            <strong id="cartTotal">
-                $0
-            </strong>
-
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cartTotal">$0</strong>
         </div>
 
-
-        <button
-            id="sendOrder"
-            class="checkout-button"
-            type="button"
-        >
+        <button id="sendOrder" class="order-button">
             💬 Pedir por WhatsApp
         </button>
 
-
-        <button
-            id="clearCart"
-            class="clear-cart-button"
-            type="button"
-        >
-            Vaciar carrito
+        <button id="clearCart" class="clear-button">
+            🗑️ Vaciar carrito
         </button>
 
     </div>
@@ -836,212 +337,82 @@
 </aside>
 
 
+<!-- ================= LOGIN ADMIN ================= -->
 
-<!-- =====================================================
-     MODAL LOGIN ADMIN
-===================================================== -->
+<div id="adminModal" class="modal">
 
-<div
-    id="adminModal"
-    class="modal"
->
+    <div class="modal-box">
 
-    <div class="modal-box admin-login-box">
-
-        <button
-            id="closeAdmin"
-            class="modal-close"
-            type="button"
-        >
+        <button id="closeAdmin" class="modal-close">
             ×
         </button>
 
+        <div class="modal-icon">🔐</div>
 
-        <div class="modal-icon">
-            🔐
-        </div>
-
-
-        <h2>
-            Administrador
-        </h2>
-
+        <h2>Administrador</h2>
 
         <p>
-            Ingresa para administrar las fotos de la galería.
+            Ingresa la contraseña para administrar la galería.
         </p>
-
 
         <input
             id="adminPassword"
             type="password"
-            placeholder="Contraseña"
-            autocomplete="off"
-        >
+            placeholder="Contraseña">
 
-
-        <button
-            id="loginAdmin"
-            class="main-button full-button"
-            type="button"
-        >
+        <button id="loginAdmin" class="admin-login-button">
             Entrar
         </button>
 
-
-        <p
-            id="adminError"
-            class="admin-error"
-        ></p>
+        <p id="adminError" class="error-message"></p>
 
     </div>
 
 </div>
 
 
+<!-- ================= PANEL ADMIN ================= -->
 
-<!-- =====================================================
-     PANEL DE ADMINISTRACIÓN
-===================================================== -->
+<div id="adminPanel" class="modal">
 
-<div
-    id="adminPanel"
-    class="modal"
->
+    <div class="admin-panel-box">
 
-    <div class="modal-box admin-panel-box">
+        <button id="closePanel" class="modal-close">
+            ×
+        </button>
 
-        <div class="admin-panel-header">
+        <h2>📸 Administrar galería</h2>
 
-            <div>
+        <p>
+            Sube las fotos que quieres mostrar públicamente.
+        </p>
 
-                <span class="section-label">
-                    🔐 PANEL ADMIN
-                </span>
+        <label class="upload-box">
 
-                <h2>
-                    Administrar galería
-                </h2>
-
-            </div>
-
-
-            <button
-                id="closePanel"
-                class="modal-close"
-                type="button"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-
-        <!-- SUBIR FOTOS -->
-
-        <div class="admin-upload">
-
-            <div class="upload-icon">
-                📸
-            </div>
-
-
-            <h3>
-                Subir fotos
-            </h3>
-
-
-            <p>
-                Selecciona las imágenes directamente desde tu
-                computador o celular.
-            </p>
-
-
-            <label
-                for="adminImages"
-                class="file-upload-button"
-            >
-                📁 Seleccionar fotos
-            </label>
-
+            <span>📁 Seleccionar fotos</span>
 
             <input
                 id="adminImages"
                 type="file"
-                accept="image/jpeg,image/png,image/webp,image/gif"
-                multiple
-                hidden
-            >
+                accept="image/*"
+                multiple>
 
+        </label>
 
-            <!-- VISTA PREVIA -->
+        <div id="adminPreview" class="admin-preview"></div>
 
-            <div
-                id="adminPreview"
-                class="admin-preview"
-            ></div>
+        <button id="uploadGallery" class="upload-button">
+            ☁️ Subir fotos
+        </button>
 
-
-            <!-- PROGRESO -->
-
-            <div
-                id="uploadProgressBox"
-                class="upload-progress-box"
-                hidden
-            >
-
-                <div class="upload-progress-top">
-
-                    <span>
-                        Subiendo...
-                    </span>
-
-                    <strong id="uploadProgressText">
-                        0%
-                    </strong>
-
-                </div>
-
-
-                <div class="upload-progress">
-
-                    <div
-                        id="uploadProgressBar"
-                        class="upload-progress-bar"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- BOTÓN PUBLICAR -->
-
-            <button
-                id="uploadGallery"
-                class="publish-review"
-                type="button"
-            >
-                🚀 Publicar fotos en la galería
-            </button>
-
-
-            <p
-                id="uploadMessage"
-                class="upload-message"
-            ></p>
-
+        <div class="upload-progress">
+            <div class="upload-progress-bar"></div>
         </div>
 
+        <p id="uploadProgressText"></p>
 
-
-        <button
-            id="logoutAdmin"
-            class="logout-button"
-            type="button"
-        >
-            Cerrar panel
+        <button id="logoutAdmin" class="logout-button">
+            Cerrar administrador
         </button>
 
     </div>
@@ -1049,84 +420,27 @@
 </div>
 
 
+<!-- ================= TOAST ================= -->
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+<div id="toast" class="toast"></div>
 
-<div
-    id="toast"
-    class="toast"
-></div>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
 <footer class="footer">
 
-    <div class="footer-logo">
-
-        <img
-            src="assets/logo.png"
-            alt="Kookie Pop"
-            onerror="this.style.display='none'"
-        >
-
-        <div>
-
-            <strong>
-                Kookie Pop
-            </strong>
-
-            <span>
-                K-Pop Store
-            </span>
-
-        </div>
-
-    </div>
-
+    <img src="assets/logo.png" alt="Kookie Pop">
 
     <p>
-        Hecho con 💜 para todos los amantes del K-Pop.
+        © 2026 Kookie Pop 💜
     </p>
 
-
-    <div class="footer-links">
-
-        <a href="#inicio">
-            Inicio
-        </a>
-
-        <a href="#productos">
-            Productos
-        </a>
-
-        <a href="#galeria">
-            Galería
-        </a>
-
-        <a href="#resenas">
-            Reseñas
-        </a>
-
-    </div>
-
-
-    <div class="footer-copy">
-        © 2026 Kookie Pop · Todos los derechos reservados.
-    </div>
+    <p>
+        K-Pop • Personalización • Amor
+    </p>
 
 </footer>
 
 
-
-<!-- =====================================================
-     FIREBASE
-===================================================== -->
+<!-- ================= FIREBASE ================= -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 
@@ -1136,94 +450,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
 
-
-<script>
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyD9FP1B4c9NlHdINhf-Vb0oMvdaua32zSM",
-
-    authDomain: "kookiepop-ccfb9.firebaseapp.com",
-
-    projectId: "kookiepop-ccfb9",
-
-    storageBucket: "kookiepop-ccfb9.firebasestorage.app",
-
-    messagingSenderId: "397148978428",
-
-    appId: "1:397148978428:web:01db457b0b9946d42ceb79",
-
-    measurementId: "G-FBGWDK31LN"
-
-};
-
-
-window.firebaseReady = false;
-window.reviewsDB = null;
-window.reviewsAuth = null;
-window.galleryStorage = null;
-
-
-try {
-
-    firebase.initializeApp(firebaseConfig);
-
-
-    window.reviewsDB =
-        firebase.database();
-
-
-    window.reviewsAuth =
-        firebase.auth();
-
-
-    window.galleryStorage =
-        firebase.storage();
-
-
-    window.firebaseReady = true;
-
-
-    window.reviewsAuth
-        .signInAnonymously()
-        .then(() => {
-
-            console.log(
-                "Kookie Pop conectado a Firebase 💜"
-            );
-
-        })
-        .catch(error => {
-
-            console.error(
-                "Error de autenticación:",
-                error
-            );
-
-        });
-
-
-} catch (error) {
-
-    console.error(
-        "Error iniciando Firebase:",
-        error
-    );
-
-    window.firebaseReady = false;
-
-}
-
-</script>
-
-
-
-<!-- =====================================================
-     SCRIPT PRINCIPAL
-===================================================== -->
-
 <script src="script.js"></script>
-
 
 </body>
 </html>
