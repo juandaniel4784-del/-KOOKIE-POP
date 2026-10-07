@@ -3,202 +3,47 @@
    Sin Firebase / Sin Galería / Sin Reseñas
 ========================================================= */
 
-
-/* ================= CONFIGURACIÓN ================= */
-
 const WHATSAPP = "573205946508";
-
 const CART_KEY = "kookiePopCart";
 
-
-/* ================= PRODUCTOS ================= */
-
 const products = [
-
-    {
-        id: 1,
-        name: "Photocard laminada",
-        price: 1500,
-        icon: "📸"
-    },
-
-    {
-        id: 2,
-        name: "Photocard sin laminar",
-        price: 1000,
-        icon: "🖼️"
-    },
-
-    {
-        id: 3,
-        name: "Paquete de Photocards x5",
-        price: 7000,
-        icon: "📸"
-    },
-
-    {
-        id: 4,
-        name: "Paquete de Photocards x10",
-        price: 13000,
-        icon: "💿"
-    },
-
-    {
-        id: 5,
-        name: "Lámina de stickers x15",
-        price: 10000,
-        icon: "✨"
-    },
-
-    {
-        id: 6,
-        name: "Foto carnet x6",
-        price: 5000,
-        icon: "🪪"
-    },
-
-    {
-        id: 7,
-        name: "Foto Strip x5",
-        price: 7000,
-        icon: "🎞️"
-    },
-
-    {
-        id: 8,
-        name: "Separador de libros",
-        price: 1500,
-        icon: "📖"
-    },
-
-    {
-        id: 9,
-        name: "Manilla",
-        price: 4000,
-        icon: "📿"
-    },
-
-    {
-        id: 10,
-        name: "Manilla Bestie Friend x2",
-        price: 7000,
-        icon: "🎀"
-    },
-
-    {
-        id: 11,
-        name: "Manilla Bestie Three Friends x3",
-        price: 10000,
-        icon: "🫶"
-    },
-
-    {
-        id: 12,
-        name: "Collar con perla",
-        price: 8000,
-        icon: "🤍"
-    },
-
-    {
-        id: 13,
-        name: "Collar con perla y dije",
-        price: 10000,
-        icon: "💎"
-    }
-
+    { id: 1, name: "Photocard laminada", price: 1500, icon: "📸" },
+    { id: 2, name: "Photocard sin laminar", price: 1000, icon: "🖼️" },
+    { id: 3, name: "Paquete de Photocards x5", price: 7000, icon: "📸" },
+    { id: 4, name: "Paquete de Photocards x10", price: 13000, icon: "💿" },
+    { id: 5, name: "Lámina de stickers x15", price: 10000, icon: "✨" },
+    { id: 6, name: "Foto carnet x6", price: 5000, icon: "🪪" },
+    { id: 7, name: "Foto Strip x5", price: 7000, icon: "🎞️" },
+    { id: 8, name: "Separador de libros", price: 1500, icon: "📖" },
+    { id: 9, name: "Manilla", price: 4000, icon: "📿" },
+    { id: 10, name: "Manilla Bestie Friend x2", price: 7000, icon: "🎀" },
+    { id: 11, name: "Manilla Bestie Three Friends x3", price: 10000, icon: "🫶" },
+    { id: 12, name: "Collar con perla", price: 8000, icon: "🤍" },
+    { id: 13, name: "Collar con perla y dije", price: 10000, icon: "💎" }
 ];
-
-
-/* ================= COMBOS ================= */
 
 const combos = [
-
-    {
-        id: 101,
-        name: "KOOKIE",
-        price: 6000,
-        icon: "🐰"
-    },
-
-    {
-        id: 102,
-        name: "K-POP",
-        price: 13000,
-        icon: "🎧"
-    },
-
-    {
-        id: 103,
-        name: "BESTIES",
-        price: 15000,
-        icon: "🎀"
-    },
-
-    {
-        id: 104,
-        name: "HOBI",
-        price: 12000,
-        icon: "🌻"
-    },
-
-    {
-        id: 105,
-        name: "KOOKIE POP",
-        price: 25000,
-        icon: "🐰"
-    },
-
-    {
-        id: 106,
-        name: "VIP",
-        price: 55000,
-        icon: "👑"
-    }
-
+    { id: 101, name: "KOOKIE", price: 6000, icon: "🐰" },
+    { id: 102, name: "K-POP", price: 13000, icon: "🎧" },
+    { id: 103, name: "BESTIES", price: 15000, icon: "🎀" },
+    { id: 104, name: "HOBI", price: 12000, icon: "🌻" },
+    { id: 105, name: "KOOKIE POP", price: 25000, icon: "🐰" },
+    { id: 106, name: "VIP", price: 55000, icon: "👑" }
 ];
-
-
-/* ================= RAMOS ================= */
 
 const bouquets = [
-
-    {
-        id: 201,
-        name: "Ramo Básico",
-        price: 25000,
-        icon: "🌷"
-    },
-
-    {
-        id: 202,
-        name: "Ramo Outro",
-        price: 35000,
-        icon: "🌸"
-    },
-
-    {
-        id: 203,
-        name: "Ramo Kookie",
-        price: 45000,
-        icon: "💐"
-    },
-
-    {
-        id: 204,
-        name: "Ramo VIP",
-        price: null,
-        icon: "👑"
-    }
-
+    { id: 201, name: "Ramo Básico", price: 25000, icon: "🌷" },
+    { id: 202, name: "Ramo Outro", price: 35000, icon: "🌸" },
+    { id: 203, name: "Ramo Kookie", price: 45000, icon: "💐" },
+    { id: 204, name: "Ramo VIP", price: null, icon: "👑" }
 ];
-
-
-/* ================= VARIABLES ================= */
 
 let cart = [];
 
 
-/* ================= ELEMENTOS ================= */
+/* =========================================================
+   ELEMENTOS DEL HTML
+========================================================= */
 
 const productsGrid = document.getElementById("productsGrid");
 const combosGrid = document.getElementById("combosGrid");
@@ -218,12 +63,13 @@ const sendOrder = document.getElementById("sendOrder");
 const clearCart = document.getElementById("clearCart");
 
 const toast = document.getElementById("toast");
-
 const whatsappLink = document.getElementById("whatsappLink");
 const personalizeButton = document.getElementById("personalizeButton");
 
 
-/* ================= FORMATO DE DINERO ================= */
+/* =========================================================
+   FORMATO DE PRECIOS
+========================================================= */
 
 function formatPrice(price) {
 
@@ -232,11 +78,12 @@ function formatPrice(price) {
     }
 
     return "$" + price.toLocaleString("es-CO");
-
 }
 
 
-/* ================= GUARDAR CARRITO ================= */
+/* =========================================================
+   GUARDAR Y CARGAR CARRITO
+========================================================= */
 
 function saveCart() {
 
@@ -244,20 +91,20 @@ function saveCart() {
         CART_KEY,
         JSON.stringify(cart)
     );
-
 }
 
-
-/* ================= CARGAR CARRITO ================= */
 
 function loadCart() {
 
     try {
 
-        const savedCart = localStorage.getItem(CART_KEY);
+        const savedCart =
+            localStorage.getItem(CART_KEY);
 
         if (savedCart) {
+
             cart = JSON.parse(savedCart);
+
         }
 
     } catch (error) {
@@ -268,15 +115,16 @@ function loadCart() {
         );
 
         cart = [];
-
     }
-
 }
 
 
-/* ================= TOAST ================= */
+/* =========================================================
+   MENSAJES TOAST
+========================================================= */
 
 let toastTimeout;
+
 
 function showToast(message) {
 
@@ -293,22 +141,26 @@ function showToast(message) {
         toast.classList.remove("show");
 
     }, 2500);
-
 }
 
 
-/* ================= CREAR TARJETA ================= */
+/* =========================================================
+   CREAR TARJETAS DE PRODUCTOS
+========================================================= */
 
 function createProductCard(product) {
 
-    const card = document.createElement("article");
+    const card =
+        document.createElement("article");
 
     card.className = "product-card";
+
 
     const priceText =
         product.price === null
             ? "Precio personalizado"
             : formatPrice(product.price);
+
 
     card.innerHTML = `
 
@@ -316,9 +168,7 @@ function createProductCard(product) {
             ${product.icon}
         </div>
 
-        <h3>
-            ${product.name}
-        </h3>
+        <h3>${product.name}</h3>
 
         <p>
             Producto Kookie Pop
@@ -342,8 +192,10 @@ function createProductCard(product) {
 
     `;
 
+
     const button =
         card.querySelector(".add-cart");
+
 
     button.addEventListener(
         "click",
@@ -354,12 +206,14 @@ function createProductCard(product) {
         }
     );
 
-    return card;
 
+    return card;
 }
 
 
-/* ================= MOSTRAR PRODUCTOS ================= */
+/* =========================================================
+   MOSTRAR PRODUCTOS
+========================================================= */
 
 function renderProducts() {
 
@@ -374,11 +228,12 @@ function renderProducts() {
         );
 
     });
-
 }
 
 
-/* ================= MOSTRAR COMBOS ================= */
+/* =========================================================
+   MOSTRAR COMBOS
+========================================================= */
 
 function renderCombos() {
 
@@ -393,11 +248,12 @@ function renderCombos() {
         );
 
     });
-
 }
 
 
-/* ================= MOSTRAR RAMOS ================= */
+/* =========================================================
+   MOSTRAR RAMOS
+========================================================= */
 
 function renderBouquets() {
 
@@ -412,11 +268,12 @@ function renderBouquets() {
         );
 
     });
-
 }
 
 
-/* ================= BUSCAR PRODUCTO ================= */
+/* =========================================================
+   BUSCAR PRODUCTO
+========================================================= */
 
 function findProduct(id) {
 
@@ -429,27 +286,32 @@ function findProduct(id) {
     return allProducts.find(
         product => product.id === id
     );
-
 }
 
 
-/* ================= AGREGAR AL CARRITO ================= */
+/* =========================================================
+   AGREGAR AL CARRITO
+========================================================= */
 
 function addToCart(product) {
 
     if (!product) return;
 
+
+    // Productos con precio personalizado
     if (product.price === null) {
 
         personalizeProduct(product);
 
         return;
-
     }
 
-    const existingItem = cart.find(
-        item => item.id === product.id
-    );
+
+    const existingItem =
+        cart.find(
+            item => item.id === product.id
+        );
+
 
     if (existingItem) {
 
@@ -460,14 +322,18 @@ function addToCart(product) {
         cart.push({
 
             id: product.id,
+
             name: product.name,
+
             price: product.price,
+
             icon: product.icon,
+
             quantity: 1
 
         });
-
     }
+
 
     saveCart();
 
@@ -475,14 +341,16 @@ function addToCart(product) {
 
     updateCartCount();
 
+
     showToast(
         `${product.name} fue agregado al carrito 💜`
     );
-
 }
 
 
-/* ================= PERSONALIZAR PRODUCTO ================= */
+/* =========================================================
+   PRODUCTO PERSONALIZADO
+========================================================= */
 
 function personalizeProduct(product) {
 
@@ -493,11 +361,12 @@ function personalizeProduct(product) {
         `Quisiera conocer el precio y las opciones disponibles.`;
 
     openWhatsApp(message);
-
 }
 
 
-/* ================= ELIMINAR PRODUCTO ================= */
+/* =========================================================
+   ELIMINAR PRODUCTO
+========================================================= */
 
 function removeFromCart(id) {
 
@@ -510,73 +379,81 @@ function removeFromCart(id) {
     renderCart();
 
     updateCartCount();
-
 }
 
 
-/* ================= CAMBIAR CANTIDAD ================= */
+/* =========================================================
+   CAMBIAR CANTIDAD
+========================================================= */
 
 function changeQuantity(id, change) {
 
-    const item = cart.find(
-        item => item.id === id
-    );
+    const item =
+        cart.find(
+            item => item.id === id
+        );
+
 
     if (!item) return;
 
+
     item.quantity += change;
+
 
     if (item.quantity <= 0) {
 
         removeFromCart(id);
 
         return;
-
     }
+
 
     saveCart();
 
     renderCart();
 
     updateCartCount();
-
 }
 
 
-/* ================= TOTAL ================= */
+/* =========================================================
+   CALCULAR TOTAL
+========================================================= */
 
 function calculateTotal() {
 
     return cart.reduce(
+
         (total, item) => {
 
             return total +
                 (item.price * item.quantity);
 
         },
+
         0
     );
-
 }
 
 
-/* ================= CANTIDAD TOTAL ================= */
+/* =========================================================
+   CONTAR PRODUCTOS
+========================================================= */
 
 function calculateCartCount() {
 
     return cart.reduce(
+
         (total, item) => {
 
             return total + item.quantity;
 
         },
+
         0
     );
-
 }
 
-
-/* ================= ACTUALIZAR CONTADOR ================= */
 
 function updateCartCount() {
 
@@ -584,18 +461,22 @@ function updateCartCount() {
 
     cartCount.textContent =
         calculateCartCount();
-
 }
 
 
-/* ================= MOSTRAR CARRITO ================= */
+/* =========================================================
+   MOSTRAR CARRITO
+========================================================= */
 
 function renderCart() {
 
     if (!cartItems) return;
 
+
     cartItems.innerHTML = "";
 
+
+    // Carrito vacío
     if (cart.length === 0) {
 
         cartItems.innerHTML = `
@@ -618,19 +499,24 @@ function renderCart() {
 
     } else {
 
+
+        // Productos del carrito
         cart.forEach(item => {
 
             const cartItem =
                 document.createElement("div");
 
+
             cartItem.className =
                 "cart-item";
+
 
             cartItem.innerHTML = `
 
                 <div class="product-icon">
                     ${item.icon}
                 </div>
+
 
                 <div class="cart-item-info">
 
@@ -644,6 +530,7 @@ function renderCart() {
 
                 </div>
 
+
                 <div class="cart-item-controls">
 
                     <button
@@ -653,9 +540,11 @@ function renderCart() {
                         −
                     </button>
 
+
                     <span>
                         ${item.quantity}
                     </span>
+
 
                     <button
                         data-action="increase"
@@ -663,6 +552,7 @@ function renderCart() {
                     >
                         +
                     </button>
+
 
                     <button
                         data-action="remove"
@@ -676,27 +566,31 @@ function renderCart() {
 
             `;
 
+
             cartItems.appendChild(
                 cartItem
             );
 
         });
-
     }
+
 
     if (cartTotal) {
 
         cartTotal.textContent =
-            formatPrice(calculateTotal());
-
+            formatPrice(
+                calculateTotal()
+            );
     }
 
-    updateCartCount();
 
+    updateCartCount();
 }
 
 
-/* ================= EVENTOS DEL CARRITO ================= */
+/* =========================================================
+   BOTONES DEL CARRITO
+========================================================= */
 
 if (cartItems) {
 
@@ -707,13 +601,17 @@ if (cartItems) {
             const button =
                 event.target.closest("button");
 
+
             if (!button) return;
+
 
             const id =
                 Number(button.dataset.id);
 
+
             const action =
                 button.dataset.action;
+
 
             if (action === "increase") {
 
@@ -721,11 +619,13 @@ if (cartItems) {
 
             }
 
+
             if (action === "decrease") {
 
                 changeQuantity(id, -1);
 
             }
+
 
             if (action === "remove") {
 
@@ -735,45 +635,66 @@ if (cartItems) {
 
         }
     );
-
 }
 
 
-/* ================= ABRIR CARRITO ================= */
+/* =========================================================
+   ABRIR CARRITO
+========================================================= */
 
 function openCartDrawer() {
 
     if (!cartDrawer) return;
 
-    cartDrawer.classList.add("active");
+
+    cartDrawer.classList.add(
+        "active"
+    );
+
 
     if (cartOverlay) {
-        cartOverlay.classList.add("active");
+
+        cartOverlay.classList.add(
+            "active"
+        );
     }
 
-    document.body.style.overflow = "hidden";
 
+    document.body.style.overflow =
+        "hidden";
 }
 
 
-/* ================= CERRAR CARRITO ================= */
+/* =========================================================
+   CERRAR CARRITO
+========================================================= */
 
 function closeCartDrawer() {
 
     if (!cartDrawer) return;
 
-    cartDrawer.classList.remove("active");
+
+    cartDrawer.classList.remove(
+        "active"
+    );
+
 
     if (cartOverlay) {
-        cartOverlay.classList.remove("active");
+
+        cartOverlay.classList.remove(
+            "active"
+        );
     }
 
-    document.body.style.overflow = "";
 
+    document.body.style.overflow =
+        "";
 }
 
 
-/* ================= BOTÓN ABRIR ================= */
+/* =========================================================
+   EVENTOS DEL CARRITO
+========================================================= */
 
 if (openCart) {
 
@@ -781,11 +702,8 @@ if (openCart) {
         "click",
         openCartDrawer
     );
-
 }
 
-
-/* ================= BOTÓN CERRAR ================= */
 
 if (closeCart) {
 
@@ -793,11 +711,8 @@ if (closeCart) {
         "click",
         closeCartDrawer
     );
-
 }
 
-
-/* ================= OVERLAY ================= */
 
 if (cartOverlay) {
 
@@ -805,11 +720,12 @@ if (cartOverlay) {
         "click",
         closeCartDrawer
     );
-
 }
 
 
-/* ================= ESCAPE ================= */
+/* =========================================================
+   CERRAR CON ESCAPE
+========================================================= */
 
 document.addEventListener(
     "keydown",
@@ -825,7 +741,9 @@ document.addEventListener(
 );
 
 
-/* ================= VACIAR CARRITO ================= */
+/* =========================================================
+   VACIAR CARRITO
+========================================================= */
 
 if (clearCart) {
 
@@ -840,10 +758,11 @@ if (clearCart) {
                 );
 
                 return;
-
             }
 
+
             cart = [];
+
 
             saveCart();
 
@@ -851,17 +770,19 @@ if (clearCart) {
 
             updateCartCount();
 
+
             showToast(
                 "Carrito vaciado 🗑️"
             );
 
         }
     );
-
 }
 
 
-/* ================= WHATSAPP ================= */
+/* =========================================================
+   WHATSAPP
+========================================================= */
 
 function openWhatsApp(message) {
 
@@ -869,30 +790,34 @@ function openWhatsApp(message) {
         `https://wa.me/${WHATSAPP}?text=` +
         encodeURIComponent(message);
 
+
     window.open(
         url,
         "_blank",
         "noopener,noreferrer"
     );
-
 }
 
 
-/* ================= LINK WHATSAPP ================= */
+/* =========================================================
+   BOTÓN DE WHATSAPP
+========================================================= */
 
 if (whatsappLink) {
 
     const message =
         "Hola Kookie Pop 💜 Quiero hacer un pedido.";
 
+
     whatsappLink.href =
         `https://wa.me/${WHATSAPP}?text=` +
         encodeURIComponent(message);
-
 }
 
 
-/* ================= PERSONALIZACIÓN ================= */
+/* =========================================================
+   PERSONALIZAR PEDIDO
+========================================================= */
 
 if (personalizeButton) {
 
@@ -909,11 +834,12 @@ if (personalizeButton) {
 
         }
     );
-
 }
 
 
-/* ================= ENVIAR PEDIDO ================= */
+/* =========================================================
+   ENVIAR PEDIDO POR WHATSAPP
+========================================================= */
 
 if (sendOrder) {
 
@@ -928,12 +854,13 @@ if (sendOrder) {
                 );
 
                 return;
-
             }
+
 
             let message =
                 "Hola Kookie Pop 💜\n\n" +
                 "Quiero realizar el siguiente pedido:\n\n";
+
 
             cart.forEach(item => {
 
@@ -944,19 +871,22 @@ if (sendOrder) {
 
             });
 
+
             message +=
                 `💰 Total: ${formatPrice(calculateTotal())}\n\n` +
                 "Quedo atento/a. ¡Gracias! 💜";
+
 
             openWhatsApp(message);
 
         }
     );
-
 }
 
 
-/* ================= INICIO ================= */
+/* =========================================================
+   INICIAR PÁGINA
+========================================================= */
 
 function init() {
 
@@ -971,11 +901,12 @@ function init() {
     renderCart();
 
     updateCartCount();
-
 }
 
 
-/* ================= EJECUTAR ================= */
+/* =========================================================
+   EJECUTAR CUANDO CARGUE LA PÁGINA
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
